@@ -1,0 +1,45 @@
+{
+  "name": "opensesame-front",
+  "version": "1.0.0",
+  "author": "macolmenerori",
+  "scripts": {
+    "start": "webpack serve --port 3000",
+    "build": "NODE_ENV=production webpack",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettify": "prettier -w --log-level=silent src/",
+    "lint": "eslint --fix .",
+    "types": "tsc --noEmit",
+    "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn build"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.10.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.30.0",
+    "eslint-plugin-jest-dom": "^5.4.0",
+    "eslint-plugin-jsx-a11y": "^6.10.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.36.1",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-testing-library": "^6.3.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.9.1",
+    "prettier": "^3.3.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.2",
+    "webpack": "^5.94.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
