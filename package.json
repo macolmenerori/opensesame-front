@@ -2,6 +2,9 @@
   "name": "opensesame-front",
   "version": "1.0.0",
   "author": "macolmenerori",
+  "engines": {
+    "node": ">=20.15.1"
+  },
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
@@ -10,6 +13,13 @@
     "lint": "eslint --fix .",
     "types": "tsc --noEmit",
     "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn build"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "swr": "^2.2.5"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
@@ -37,9 +47,5 @@
     "webpack": "^5.94.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
   }
 }
