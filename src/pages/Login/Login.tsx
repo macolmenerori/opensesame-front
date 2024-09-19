@@ -23,8 +23,47 @@ function Login() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="container d-flex vh-100 align-items-center justify-content-center">
+      <div className="card text-bg-light" style={{ width: '20rem' }}>
+        <div className="card-body">
+          <h2 className="card-title text-center">opensesame</h2>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
+          <form onSubmit={handleLogin}>
+            <div className="mb-3">
+              <label className="form-label">Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label className="form-label">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="form-control"
+                required
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Login;
+
+/*
+
+<h2>Login</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleLogin}>
         <div>
@@ -42,8 +81,5 @@ function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
-    </div>
-  );
-}
 
-export default Login;
+*/
