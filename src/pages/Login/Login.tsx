@@ -27,7 +27,6 @@ function Login() {
       <div className="card text-bg-light" style={{ width: '20rem' }}>
         <div className="card-body">
           <h2 className="card-title text-center">opensesame</h2>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleLogin}>
             <div className="mb-3">
               <label className="form-label">Email</label>
@@ -49,6 +48,7 @@ function Login() {
                 required
               />
             </div>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
             <button type="submit" className="btn btn-primary">
               Login
             </button>
