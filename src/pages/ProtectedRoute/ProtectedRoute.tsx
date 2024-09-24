@@ -1,23 +1,30 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import useSWR from 'swr';
 
 import api from '../../api';
 
 const ProtectedRoute = () => {
-  const { data, error, isLoading } = useSWR('/v1/users/isloggedin', () => {
-    return api.get('/v1/users/isloggedin').then((response) => response.data);
-  });
+  const [auth, setAuth] = useState<boolean | null>(null);
 
-  return (
-    <>
-      {isLoading && <div>Loading...</div>}
-      {/* TODO: create LoadingCard or spinner */}
-      {error && <Navigate to="/login" />}
-      {data && <Navigate to="/mainpage" />}
-    </>
-  );
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        await api.get('/v1/users/isloggedin');
+        setAuth(true);
+      } catch (err) {
+        setAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
+
+  // TODO: create loading spinner
+  if (auth === null) return <div>Loading...</div>;
+
+  return auth ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;
