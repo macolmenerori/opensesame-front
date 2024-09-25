@@ -12,3 +12,9 @@ export type PaginationApi = {
   totalPages: number;
   currentPage: number;
 };
+
+export type PermissionsApiResponse = {
+  status: string;
+  message: string;
+  data: { permissions: string[] };
+};
