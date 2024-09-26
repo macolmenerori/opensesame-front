@@ -8,25 +8,14 @@ import { PermissionsApiResponse } from '../../common/types/Api.types';
 import { PermissionsModalProps } from './PermissionsModal.types';
 
 const PermissionsModal = ({ permissionsModalUser }: PermissionsModalProps) => {
-  //   const { data, error, isLoading } = useSWR(
-  //     permissionsModalUser === '' ? null : ['/v1/users/permissions', permissionsModalUser],
-  //     () => {
-  //       return api
-  //         .get<PermissionsApiResponse>('/v1/users/permissions', {
-  //           params: { email: permissionsModalUser }
-  //         })
-  //         .then((res) => res.data);
-  //     }
-  //   );
-
-  //   console.log('permissions: ', data); // TODO: remove
-
-  // TODO: mock, delete when API is ready
-  const data = {
-    status: 'ok',
-    message: 'ok',
-    data: { permissions: ['permission1', 'permission2', 'permission3', 'permission4'] }
-  } as PermissionsApiResponse;
+  const { data, error, isLoading } = useSWR(
+    permissionsModalUser === '' ? null : `/v1/users/permissions?email=${permissionsModalUser}`,
+    () => {
+      return api
+        .get<PermissionsApiResponse>(`/v1/users/permissions?email=${permissionsModalUser}`)
+        .then((res) => res.data);
+    }
+  );
 
   return (
     <div
@@ -50,7 +39,13 @@ const PermissionsModal = ({ permissionsModalUser }: PermissionsModalProps) => {
             ></button>
           </div>
           <div className="modal-body">
-            <p>{data.data.permissions.join(', ')}</p>
+            {/* TODO: loading spinner */}
+            {isLoading && <p>Loading...</p>}
+            {error && <p>Error loading permissions for this user.</p>}
+            {data && data.data.permissions.length === 0 && (
+              <p>This user does not have any permissions assigned.</p>
+            )}
+            {data && data.data.permissions.length > 0 && <p>{data.data.permissions.join(', ')}</p>}
           </div>
           <div className="modal-footer">
             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
