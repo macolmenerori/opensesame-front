@@ -21,8 +21,12 @@ const ProtectedRoute = () => {
     checkAuth();
   }, []);
 
-  // TODO: create loading spinner
-  if (auth === null) return <div>Loading...</div>;
+  if (auth === null)
+    return (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
 
   return auth ? <Outlet /> : <Navigate to="/login" />;
 };

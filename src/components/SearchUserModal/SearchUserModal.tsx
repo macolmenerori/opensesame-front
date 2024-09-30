@@ -74,7 +74,7 @@ const SearchUserModal = () => {
             </div>
             <div className="modal-body">
               <input
-                className="form-control"
+                className="form-control mb-3"
                 type="text"
                 value={query}
                 onChange={handleInputChange}
@@ -82,7 +82,9 @@ const SearchUserModal = () => {
               />
               <div>
                 {loading ? (
-                  <p>Loading...</p>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
                 ) : (
                   users.length > 0 && <SearchUserTable users={users} />
                 )}

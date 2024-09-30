@@ -35,8 +35,11 @@ const ManageUsers = () => {
       <Navbar />
       <div className="container">
         <h1 className="mt-3 mb-3">Manage users</h1>
-        {isLoading && <p>Loading...</p>}
-        {/* TODO: loading spinner */}
+        {isLoading && (
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )}
         {error && <p>Error</p>}
         {data && (
           <>

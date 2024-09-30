@@ -39,8 +39,11 @@ const PermissionsModal = ({ permissionsModalUser }: PermissionsModalProps) => {
             ></button>
           </div>
           <div className="modal-body">
-            {/* TODO: loading spinner */}
-            {isLoading && <p>Loading...</p>}
+            {isLoading && (
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            )}
             {error && <p>Error loading permissions for this user.</p>}
             {data && data.data.permissions.length === 0 && (
               <p>This user does not have any permissions assigned.</p>
