@@ -24,8 +24,12 @@ function Login() {
     checkAuth();
   }, []);
 
-  // TODO: create loading spinner
-  if (auth === null) return <div>Loading...</div>;
+  if (auth === null)
+    return (
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    );
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

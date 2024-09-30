@@ -4,4 +4,6 @@ export type User = {
   email: string;
   role: string;
   permissions: string[];
+  passwordChangedAt?: string;
+  __v?: number;
 };
