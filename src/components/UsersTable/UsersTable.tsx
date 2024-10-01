@@ -3,7 +3,11 @@ import React from 'react';
 import ActionDropdown from './ActionDropdown/ActionDropdown';
 import { UsersTableProps } from './UsersTable.types';
 
-const UsersTable = ({ data, setPermissionsModalUser }: UsersTableProps) => {
+const UsersTable = ({
+  data,
+  setPermissionsModalUser,
+  setUserDetailsModalUser
+}: UsersTableProps) => {
   // TODO: truncate permissions string: click to see more on a modal
   const tableBody = data.map((user) => (
     <tr key={user._id}>
@@ -20,7 +24,13 @@ const UsersTable = ({ data, setPermissionsModalUser }: UsersTableProps) => {
         {user.permissions.join(', ').substring(0, 15) + '...'}
       </td>
       <td className="text-secondary text-center">
-        <button type="button" className="btn btn-secondary btn-sm">
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#userDetailsModal"
+          onClick={() => setUserDetailsModalUser(user)}
+        >
           User details
         </button>
       </td>
