@@ -76,7 +76,7 @@ const ManageUsers = () => {
               setPerPage={(newPerPage) => setPerPage(newPerPage)}
             />
             <PermissionsModal permissionsModalUser={permissionsModalUser} />
-            <SearchUserModal />
+            <SearchUserModal setUserDetailsModalUser={setUserDetailsModalUser} />
             <UserDetailsModal
               user={userDetailsModalUser}
               setUserDetailsModalUser={setUserDetailsModalUser}

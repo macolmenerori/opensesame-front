@@ -5,8 +5,9 @@ import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
 
 import SearchUserTable from './SearchUserTable/SearchUserTable';
+import { SearchUserModalProps } from './SearchUserModal.types';
 
-const SearchUserModal = () => {
+const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
   const [query, setQuery] = useState('');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
@@ -86,12 +87,22 @@ const SearchUserModal = () => {
                     <span className="visually-hidden">Loading...</span>
                   </div>
                 ) : (
-                  users.length > 0 && <SearchUserTable users={users} />
+                  users.length > 0 && (
+                    <SearchUserTable
+                      users={users}
+                      setUserDetailsModalUser={setUserDetailsModalUser}
+                    />
+                  )
                 )}
               </div>
             </div>
             <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                data-bs-dismiss="modal"
+                onClick={() => setUserDetailsModalUser(undefined)}
+              >
                 Close
               </button>
             </div>
