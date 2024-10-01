@@ -2,13 +2,19 @@ import React from 'react';
 
 import { SearchUserTableProps } from './SearchUserTable.types';
 
-const SearchUserTable = ({ users }: SearchUserTableProps) => {
+const SearchUserTable = ({ users, setUserDetailsModalUser }: SearchUserTableProps) => {
   const usersRows = users.map((user) => (
     <tr key={user._id}>
       <td className="text-secondary">{user.name}</td>
       <td className="text-secondary text-center">{user.email}</td>
       <td className="text-center">
-        <button type="button" className="btn btn-secondary btn-sm">
+        <button
+          type="button"
+          className="btn btn-secondary btn-sm"
+          data-bs-toggle="modal"
+          data-bs-target="#userDetailsModal"
+          onClick={() => setUserDetailsModalUser(user)}
+        >
           User details
         </button>
       </td>
