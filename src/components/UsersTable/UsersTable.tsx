@@ -35,7 +35,7 @@ const UsersTable = ({
         </button>
       </td>
       <td className="text-secondary text-center">
-        <ActionDropdown />
+        <ActionDropdown user={user} setUserModal={setUserDetailsModalUser} />
       </td>
     </tr>
   ));

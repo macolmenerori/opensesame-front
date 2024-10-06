@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import api from '../../api';
 import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
+import UpdatePermissionsModal from '../../components/ActionModals/UpdatePermissionsModal/UpdatePermissionsModal';
 import Navbar from '../../components/Navbar/Navbar';
 import Pagination from '../../components/Pagination/Pagination';
 import PermissionsModal from '../../components/PermissionsModal/PermissionsModal';
@@ -80,6 +81,10 @@ const ManageUsers = () => {
             <UserDetailsModal
               user={userDetailsModalUser}
               setUserDetailsModalUser={setUserDetailsModalUser}
+            />
+            <UpdatePermissionsModal
+              permissionsModalUser={userDetailsModalUser}
+              setPermissionsModalUser={setUserDetailsModalUser}
             />
           </>
         )}
