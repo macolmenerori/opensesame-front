@@ -41,9 +41,11 @@ const UpdatePermissionsModal = ({
         setShowError(false);
         clickClose();
       } else {
+        // TODO: manage error
         setShowError(true);
       }
     } catch (error) {
+      // TODO: manage error
       setShowError(true);
     }
   };

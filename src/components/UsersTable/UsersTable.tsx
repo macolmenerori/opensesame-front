@@ -8,7 +8,6 @@ const UsersTable = ({
   setPermissionsModalUser,
   setUserDetailsModalUser
 }: UsersTableProps) => {
-  // TODO: truncate permissions string: click to see more on a modal
   const tableBody = data.map((user) => (
     <tr key={user._id}>
       <td>{user.name}</td>
