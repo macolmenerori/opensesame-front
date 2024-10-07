@@ -1,6 +1,8 @@
 import React from 'react';
 
-const ActionDropdown = () => {
+import { ActionDropdownProps } from './ActionDropdown.types';
+
+const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
   return (
     <div className="dropdown">
       <button
@@ -13,7 +15,13 @@ const ActionDropdown = () => {
       </button>
       <ul className="dropdown-menu">
         <li>
-          <button className="dropdown-item" type="button">
+          <button
+            className="dropdown-item"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#updatePermissionsModal"
+            onClick={() => setUserModal(user)}
+          >
             Update permissions
           </button>
         </li>

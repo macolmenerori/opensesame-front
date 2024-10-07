@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import api from '../../api';
 import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
+import UpdatePermissionsModal from '../../components/ActionModals/UpdatePermissionsModal/UpdatePermissionsModal';
 import Navbar from '../../components/Navbar/Navbar';
 import Pagination from '../../components/Pagination/Pagination';
 import PermissionsModal from '../../components/PermissionsModal/PermissionsModal';
@@ -15,11 +16,10 @@ import UsersTable from '../../components/UsersTable/UsersTable';
 const ManageUsers = () => {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(10);
-  //   const [totalCount, setTotalCount] = useState<number>(0);
-  //   const [totalPages, setTotalPages] = useState<number>(0);
   const [permissionsModalUser, setPermissionsModalUser] = useState<string>('');
   const [userDetailsModalUser, setUserDetailsModalUser] = useState<User | undefined>(undefined);
 
+  // TODO: manage error: display a message to the user or something
   const { data, error, isLoading } = useSWR(
     `/v1/users/allusers?page=${page}&perpage=${perPage}`,
     () => {
@@ -28,10 +28,6 @@ const ManageUsers = () => {
         .then((res) => res.data);
     }
   );
-
-  console.log('data: ', data); // TODO: remove
-  console.log('Page: ', page, 'per page: ', perPage); // TODO: remove
-  console.log('permissionsModalUser: ', permissionsModalUser); // TODO: remove
 
   return (
     <>
@@ -80,6 +76,10 @@ const ManageUsers = () => {
             <UserDetailsModal
               user={userDetailsModalUser}
               setUserDetailsModalUser={setUserDetailsModalUser}
+            />
+            <UpdatePermissionsModal
+              permissionsModalUser={userDetailsModalUser}
+              setPermissionsModalUser={setUserDetailsModalUser}
             />
           </>
         )}
