@@ -26,7 +26,13 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
           </button>
         </li>
         <li>
-          <button className="dropdown-item" type="button">
+          <button
+            className="dropdown-item"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#updateRolesModal"
+            onClick={() => setUserModal(user)}
+          >
             Update role
           </button>
         </li>
@@ -36,7 +42,7 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
           </button>
         </li>
         <li>
-          <button className="dropdown-item" type="button">
+          <button className="dropdown-item text-danger" type="button">
             Delete user
           </button>
         </li>
