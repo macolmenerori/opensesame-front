@@ -6,7 +6,8 @@ import { UpdatePermissionsModalProps } from './UpdatePermissionsModal.types';
 
 const UpdatePermissionsModal = ({
   permissionsModalUser,
-  setPermissionsModalUser
+  setPermissionsModalUser,
+  refreshData
 }: UpdatePermissionsModalProps) => {
   const [permissions, setPermissions] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
@@ -39,6 +40,7 @@ const UpdatePermissionsModal = ({
       if (res.status === 200) {
         setPermissionsModalUser(undefined);
         setShowError(false);
+        refreshData();
         clickClose();
       } else {
         // TODO: manage error

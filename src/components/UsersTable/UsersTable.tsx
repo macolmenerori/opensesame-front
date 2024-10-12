@@ -39,7 +39,7 @@ const UsersTable = ({
     </tr>
   ));
 
-  const tableDividerStyle = { 'border-top-color': '#6c757d' } as React.CSSProperties;
+  const tableDividerStyle = { borderTopColor: '#6c757d' } as React.CSSProperties;
 
   return (
     <table className="table table-hover">

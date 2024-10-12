@@ -4,7 +4,11 @@ import api from '../../../api';
 
 import { DeleteUserModalProps } from './DeleteUserModal.types';
 
-const DeleteUserModal = ({ deleteUserModal, setDeleteUserModal }: DeleteUserModalProps) => {
+const DeleteUserModal = ({
+  deleteUserModal,
+  setDeleteUserModal,
+  refreshData
+}: DeleteUserModalProps) => {
   const [showError, setShowError] = useState<boolean>(false);
 
   // Click the Close button programmatically
@@ -19,6 +23,7 @@ const DeleteUserModal = ({ deleteUserModal, setDeleteUserModal }: DeleteUserModa
       if (res.status === 204) {
         setDeleteUserModal(undefined);
         setShowError(false);
+        refreshData();
         clickClose();
       } else {
         // TODO: manage error
