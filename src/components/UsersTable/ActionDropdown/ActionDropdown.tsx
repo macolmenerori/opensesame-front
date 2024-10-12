@@ -42,7 +42,13 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
           </button>
         </li>
         <li>
-          <button className="dropdown-item text-danger" type="button">
+          <button
+            className="dropdown-item text-danger"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#deleteUserModal"
+            onClick={() => setUserModal(user)}
+          >
             Delete user
           </button>
         </li>

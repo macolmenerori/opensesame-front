@@ -4,7 +4,11 @@ import api from '../../../api';
 
 import { UpdateRolesModalProps } from './UpdateRolesModal.types';
 
-const UpdateRolesModal = ({ roleModalUser, setRoleModalUser }: UpdateRolesModalProps) => {
+const UpdateRolesModal = ({
+  roleModalUser,
+  setRoleModalUser,
+  refreshData
+}: UpdateRolesModalProps) => {
   const [role, setRole] = useState<string>('');
   const [showError, setShowError] = useState<boolean>(false);
 
@@ -42,6 +46,7 @@ const UpdateRolesModal = ({ roleModalUser, setRoleModalUser }: UpdateRolesModalP
       if (res.status === 200) {
         setRoleModalUser(undefined);
         setShowError(false);
+        refreshData();
         clickClose();
       } else {
         // TODO: manage error

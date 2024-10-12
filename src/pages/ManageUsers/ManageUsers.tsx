@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import api from '../../api';
 import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
+import DeleteUserModal from '../../components/ActionModals/DeleteUserModal/DeleteUserModal';
 import UpdatePermissionsModal from '../../components/ActionModals/UpdatePermissionsModal/UpdatePermissionsModal';
 import UpdateRolesModal from '../../components/ActionModals/UpdateRolesModal/UpdateRolesModal';
 import Navbar from '../../components/Navbar/Navbar';
@@ -21,14 +22,16 @@ const ManageUsers = () => {
   const [userDetailsModalUser, setUserDetailsModalUser] = useState<User | undefined>(undefined);
 
   // TODO: manage error: display a message to the user or something
-  const { data, error, isLoading } = useSWR(
-    `/v1/users/allusers?page=${page}&perpage=${perPage}`,
-    () => {
-      return api
-        .get<UserApiResponse>(`/v1/users/allusers?page=${page}&perpage=${perPage}`)
-        .then((res) => res.data);
-    }
-  );
+  const {
+    data,
+    error,
+    isLoading,
+    mutate: refreshData
+  } = useSWR(`/v1/users/allusers?page=${page}&perpage=${perPage}`, () => {
+    return api
+      .get<UserApiResponse>(`/v1/users/allusers?page=${page}&perpage=${perPage}`)
+      .then((res) => res.data);
+  });
 
   return (
     <>
@@ -81,10 +84,17 @@ const ManageUsers = () => {
             <UpdatePermissionsModal
               permissionsModalUser={userDetailsModalUser}
               setPermissionsModalUser={setUserDetailsModalUser}
+              refreshData={() => refreshData()}
             />
             <UpdateRolesModal
               roleModalUser={userDetailsModalUser}
               setRoleModalUser={setUserDetailsModalUser}
+              refreshData={() => refreshData()}
+            />
+            <DeleteUserModal
+              deleteUserModal={userDetailsModalUser}
+              setDeleteUserModal={setUserDetailsModalUser}
+              refreshData={() => refreshData()}
             />
           </>
         )}
