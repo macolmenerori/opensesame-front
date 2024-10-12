@@ -81,7 +81,7 @@ const UpdatePermissionsModal = ({
                 <b>Permissions:</b>
               </p>
               <div className="input-group">
-                {permissionsModalUser && permissionsModalUser.permissions.length > 0 ? (
+                {permissionsModalUser ? (
                   <textarea
                     className="form-control"
                     aria-label="With textarea"
