@@ -37,7 +37,13 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
           </button>
         </li>
         <li>
-          <button className="dropdown-item" type="button">
+          <button
+            className="dropdown-item"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#changePasswordModal"
+            onClick={() => setUserModal(user)}
+          >
             Change password
           </button>
         </li>

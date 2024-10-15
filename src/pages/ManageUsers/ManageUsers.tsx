@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import api from '../../api';
 import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
+import ChangePasswordModal from '../../components/ActionModals/ChangePasswordModal/ChangePasswordModal';
 import DeleteUserModal from '../../components/ActionModals/DeleteUserModal/DeleteUserModal';
 import UpdatePermissionsModal from '../../components/ActionModals/UpdatePermissionsModal/UpdatePermissionsModal';
 import UpdateRolesModal from '../../components/ActionModals/UpdateRolesModal/UpdateRolesModal';
@@ -90,6 +91,10 @@ const ManageUsers = () => {
               roleModalUser={userDetailsModalUser}
               setRoleModalUser={setUserDetailsModalUser}
               refreshData={() => refreshData()}
+            />
+            <ChangePasswordModal
+              passwordModalUser={userDetailsModalUser}
+              setPasswordModalUser={setUserDetailsModalUser}
             />
             <DeleteUserModal
               deleteUserModal={userDetailsModalUser}
