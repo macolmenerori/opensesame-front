@@ -1,6 +1,7 @@
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
+import api from '../../api';
 import Navbar from '../../components/Navbar/Navbar';
 
 import { SignupForm } from './NewUser.types';
@@ -10,13 +11,32 @@ const NewUser = () => {
     register,
     handleSubmit,
     formState: { errors },
-    watch
+    watch,
+    reset
   } = useForm<SignupForm>();
   const password = watch('password');
 
-  const onSubmit: SubmitHandler<SignupForm> = (data) => {
+  const onSubmit: SubmitHandler<SignupForm> = async (data) => {
     console.log('Form Data: ', data);
-    // Handle form submission here, e.g., send to backend API
+    try {
+      const res = await api.post('/v1/users/signup', data, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (res.status === 201) {
+        // TODO: show message OKAY
+        console.log('User created');
+        reset();
+      } else {
+        // TODO: manage error
+        console.log('Error');
+      }
+    } catch (e) {
+      // TODO: manage error
+      console.log(e);
+    }
   };
 
   return (
