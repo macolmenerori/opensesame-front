@@ -22,7 +22,6 @@ const ManageUsers = () => {
   const [permissionsModalUser, setPermissionsModalUser] = useState<string>('');
   const [userDetailsModalUser, setUserDetailsModalUser] = useState<User | undefined>(undefined);
 
-  // TODO: manage error: display a message to the user or something
   const {
     data,
     error,
@@ -44,7 +43,7 @@ const ManageUsers = () => {
             <span className="visually-hidden">Loading...</span>
           </div>
         )}
-        {error && <p>Error</p>}
+        {error && <p className="text-danger">Error retrieving users. Try again later...</p>}
         {data && (
           <>
             <button

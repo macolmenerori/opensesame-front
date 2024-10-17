@@ -3,11 +3,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import api from '../../api';
 import { UserApiResponse } from '../../common/types/Api.types';
 import { User } from '../../common/types/User.types';
+import { useToast } from '../../context/ToastContext/ToastContext';
 
 import SearchUserTable from './SearchUserTable/SearchUserTable';
 import { SearchUserModalProps } from './SearchUserModal.types';
 
 const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
+  const { showToast } = useToast();
+
   const [query, setQuery] = useState('');
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(false);
@@ -30,10 +33,15 @@ const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
       const response = await api.get<UserApiResponse>(
         `/v1/users/searchbyname?name=${query}&page=1&perpage=10`
       );
-      setUsers(response.data.data.users);
+
+      if (response.status === 200) {
+        setUsers(response.data.data.users);
+      } else {
+        showToast({ title: 'Error', message: 'Error searching for users', type: 'danger' });
+        setUsers([]);
+      }
     } catch (error) {
-      // TODO: manage error
-      console.error('Error fetching users:', error);
+      showToast({ title: 'Error', message: 'Error searching for users', type: 'danger' });
       setUsers([]);
     } finally {
       setLoading(false);
@@ -54,7 +62,7 @@ const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
   return (
     <div>
       <div
-        className="modal fade"
+        className="z-5 modal fade"
         id="searchUserModal"
         tabIndex={-1}
         aria-labelledby="searusermodal"

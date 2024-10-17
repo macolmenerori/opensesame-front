@@ -15,7 +15,7 @@ const StatusToast = ({ title, message, type, onClose }: StatusToastProps) => {
     };
   }, [onClose]);
 
-  const toastCardStyle = { width: '18rem' } as React.CSSProperties;
+  const toastCardStyle = { width: '18rem', zIndex: '10' } as React.CSSProperties;
 
   return (
     <div className="d-block mx-auto fixed-top mt-5" style={toastCardStyle}>
