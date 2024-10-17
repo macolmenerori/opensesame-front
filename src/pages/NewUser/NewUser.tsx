@@ -3,6 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 
 import api from '../../api';
 import Navbar from '../../components/Navbar/Navbar';
+import { useToast } from '../../context/ToastContext/ToastContext';
 
 import { SignupForm } from './NewUser.types';
 
@@ -14,10 +15,11 @@ const NewUser = () => {
     watch,
     reset
   } = useForm<SignupForm>();
+  const { showToast } = useToast();
+
   const password = watch('password');
 
   const onSubmit: SubmitHandler<SignupForm> = async (data) => {
-    console.log('Form Data: ', data);
     try {
       const res = await api.post('/v1/users/signup', data, {
         headers: {
@@ -26,16 +28,13 @@ const NewUser = () => {
       });
 
       if (res.status === 201) {
-        // TODO: show message OKAY
-        console.log('User created');
+        showToast({ title: 'Success', message: 'User was created', type: 'success' });
         reset();
       } else {
-        // TODO: manage error
-        console.log('Error');
+        showToast({ title: 'Error', message: 'User was not created', type: 'danger' });
       }
     } catch (e) {
-      // TODO: manage error
-      console.log(e);
+      showToast({ title: 'Error', message: 'User was not created', type: 'danger' });
     }
   };
 

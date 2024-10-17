@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import api from '../../../api';
+import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { DeleteUserModalProps } from './DeleteUserModal.types';
 
@@ -9,7 +10,7 @@ const DeleteUserModal = ({
   setDeleteUserModal,
   refreshData
 }: DeleteUserModalProps) => {
-  const [showError, setShowError] = useState<boolean>(false);
+  const { showToast } = useToast();
 
   // Click the Close button programmatically
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -22,16 +23,14 @@ const DeleteUserModal = ({
       const res = await api.delete(`/v1/users/delete?email=${deleteUserModal.email}`);
       if (res.status === 204) {
         setDeleteUserModal(undefined);
-        setShowError(false);
         refreshData();
         clickClose();
+        showToast({ title: 'Success', message: 'User was deleted', type: 'success' });
       } else {
-        // TODO: manage error
-        setShowError(true);
+        showToast({ title: 'Error', message: 'User was not deleted', type: 'danger' });
       }
     } catch (error) {
-      // TODO: manage error
-      setShowError(true);
+      showToast({ title: 'Error', message: 'User was not deleted', type: 'danger' });
     }
   };
 
@@ -82,24 +81,6 @@ const DeleteUserModal = ({
           </div>
         </div>
       </div>
-      {/* Error Toast */}
-      {showError && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3">
-          <div className="toast show bg-danger text-white" role="alert">
-            <div className="toast-header bg-danger text-white">
-              <strong className="me-auto">Error</strong>
-              <button
-                type="button"
-                ref={closeButtonRef}
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowError(false)}
-              ></button>
-            </div>
-            <div className="toast-body">Failed to delete user. Please try again.</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import api from '../../../api';
+import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { ChangePasswordModalProps } from './ChangePasswordModal.types';
 
@@ -8,7 +9,8 @@ const ChangePasswordModal = ({
   passwordModalUser,
   setPasswordModalUser
 }: ChangePasswordModalProps) => {
-  const [showError, setShowError] = useState<boolean>(false);
+  const { showToast } = useToast();
+
   const [samePasswordsError, setSamePasswordsError] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<string>('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState<string>('');
@@ -40,15 +42,13 @@ const ChangePasswordModal = ({
 
       if (res.status == 200) {
         setPasswordModalUser(undefined);
-        setShowError(false);
         clickClose();
+        showToast({ title: 'Success', message: 'Password was updated', type: 'success' });
       } else {
-        // TODO: manage error
-        setShowError(true);
+        showToast({ title: 'Error', message: 'Password was not updated', type: 'danger' });
       }
     } catch (e) {
-      // TODO: manage error
-      setShowError(true);
+      showToast({ title: 'Error', message: 'Password was not updated', type: 'danger' });
     }
   };
 
@@ -116,24 +116,6 @@ const ChangePasswordModal = ({
           </div>
         </div>
       </div>
-      {/* Error Toast */}
-      {showError && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3">
-          <div className="toast show bg-danger text-white" role="alert">
-            <div className="toast-header bg-danger text-white">
-              <strong className="me-auto">Error</strong>
-              <button
-                type="button"
-                ref={closeButtonRef}
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowError(false)}
-              ></button>
-            </div>
-            <div className="toast-body">Failed to update permissions. Please try again.</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

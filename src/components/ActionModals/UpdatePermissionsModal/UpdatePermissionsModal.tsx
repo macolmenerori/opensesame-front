@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import api from '../../../api';
+import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { UpdatePermissionsModalProps } from './UpdatePermissionsModal.types';
 
@@ -9,8 +10,9 @@ const UpdatePermissionsModal = ({
   setPermissionsModalUser,
   refreshData
 }: UpdatePermissionsModalProps) => {
+  const { showToast } = useToast();
+
   const [permissions, setPermissions] = useState<string>('');
-  const [showError, setShowError] = useState<boolean>(false);
 
   // Click the Close button programmatically
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -39,16 +41,14 @@ const UpdatePermissionsModal = ({
 
       if (res.status === 200) {
         setPermissionsModalUser(undefined);
-        setShowError(false);
         refreshData();
         clickClose();
+        showToast({ title: 'Success', message: 'Permissions where updated', type: 'success' });
       } else {
-        // TODO: manage error
-        setShowError(true);
+        showToast({ title: 'Error', message: 'Permissions where not updated', type: 'danger' });
       }
     } catch (error) {
-      // TODO: manage error
-      setShowError(true);
+      showToast({ title: 'Error', message: 'Permissions where not updated', type: 'danger' });
     }
   };
 
@@ -107,24 +107,6 @@ const UpdatePermissionsModal = ({
           </div>
         </div>
       </div>
-      {/* Error Toast */}
-      {showError && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3">
-          <div className="toast show bg-danger text-white" role="alert">
-            <div className="toast-header bg-danger text-white">
-              <strong className="me-auto">Error</strong>
-              <button
-                type="button"
-                ref={closeButtonRef}
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowError(false)}
-              ></button>
-            </div>
-            <div className="toast-body">Failed to update permissions. Please try again.</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };

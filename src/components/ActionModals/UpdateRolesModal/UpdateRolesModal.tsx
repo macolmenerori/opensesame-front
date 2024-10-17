@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import api from '../../../api';
+import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { UpdateRolesModalProps } from './UpdateRolesModal.types';
 
@@ -9,8 +10,9 @@ const UpdateRolesModal = ({
   setRoleModalUser,
   refreshData
 }: UpdateRolesModalProps) => {
+  const { showToast } = useToast();
+
   const [role, setRole] = useState<string>('');
-  const [showError, setShowError] = useState<boolean>(false);
 
   // Click the Close button programmatically
   const closeButtonRef = React.useRef<HTMLButtonElement>(null);
@@ -45,16 +47,14 @@ const UpdateRolesModal = ({
 
       if (res.status === 200) {
         setRoleModalUser(undefined);
-        setShowError(false);
         refreshData();
         clickClose();
+        showToast({ title: 'Success', message: 'Role was updated', type: 'success' });
       } else {
-        // TODO: manage error
-        setShowError(true);
+        showToast({ title: 'Error', message: 'Role was not updated', type: 'danger' });
       }
     } catch (error) {
-      // TODO: manage error
-      setShowError(true);
+      showToast({ title: 'Error', message: 'Role was not updated', type: 'danger' });
     }
   };
 
@@ -112,24 +112,6 @@ const UpdateRolesModal = ({
           </div>
         </div>
       </div>
-      {/* Error Toast */}
-      {showError && (
-        <div className="toast-container position-fixed bottom-0 end-0 p-3">
-          <div className="toast show bg-danger text-white" role="alert">
-            <div className="toast-header bg-danger text-white">
-              <strong className="me-auto">Error</strong>
-              <button
-                type="button"
-                ref={closeButtonRef}
-                className="btn-close"
-                aria-label="Close"
-                onClick={() => setShowError(false)}
-              ></button>
-            </div>
-            <div className="toast-body">Failed to update permissions. Please try again.</div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
