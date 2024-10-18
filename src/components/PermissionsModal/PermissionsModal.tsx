@@ -7,6 +7,13 @@ import { PermissionsApiResponse } from '../../common/types/Api.types';
 
 import { PermissionsModalProps } from './PermissionsModal.types';
 
+/**
+ * Modal for displaying the permissions of a user in a more detailed way
+ *
+ * @param {string} permissionsModalUser User to display the permissions
+ *
+ * @returns {JSX.Element} PermissionsModal component
+ */
 const PermissionsModal = ({ permissionsModalUser }: PermissionsModalProps) => {
   const { data, error, isLoading } = useSWR(
     permissionsModalUser === '' ? null : `/v1/users/permissions?email=${permissionsModalUser}`,

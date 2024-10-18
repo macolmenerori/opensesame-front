@@ -5,6 +5,13 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import api from '../../api';
 import { useUser } from '../../context/UserContext/UserContext';
 
+/**
+ * Login page. User can login with email and password. This sets the user in the UserContext and a JWT token on a cookie.
+ * Redirects to the main page after successful login, or stays on the login page if the login fails.
+ * If the user is already logged in, redirects to the main page.
+ *
+ * @returns {JSX.Element} Login component
+ */
 function Login() {
   const { setUser } = useUser();
 

@@ -2,6 +2,14 @@ import React from 'react';
 
 import { SearchUserTableProps } from './SearchUserTable.types';
 
+/**
+ * Table to display the users found in the search by SearchUserModal
+ *
+ * @param {User[]} users Users found in the search
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setUserDetailsModalUser Set the user to show the details
+ *
+ * @returns {JSX.Element} SearchUserTable component
+ */
 const SearchUserTable = ({ users, setUserDetailsModalUser }: SearchUserTableProps) => {
   const usersRows = users.map((user) => (
     <tr key={user._id}>

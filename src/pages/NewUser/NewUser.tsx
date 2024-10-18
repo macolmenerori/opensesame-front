@@ -7,6 +7,10 @@ import { useToast } from '../../context/ToastContext/ToastContext';
 
 import { SignupForm } from './NewUser.types';
 
+/**
+ * New user page. Allows the admin to create a new user, assigning roles and permissions and setting their password.
+ * @returns {JSX.Element} NewUser component
+ */
 const NewUser = () => {
   const {
     register,
@@ -37,6 +41,8 @@ const NewUser = () => {
       showToast({ title: 'Error', message: 'User was not created', type: 'danger' });
     }
   };
+
+  // TODO: show only if user is admin
 
   return (
     <>

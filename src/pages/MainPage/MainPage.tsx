@@ -3,6 +3,11 @@ import { NavLink } from 'react-router-dom';
 
 import Navbar from '../../components/Navbar/Navbar';
 
+/**
+ * Main page once the user is logged in. Contains links to Manage Users page and Create User page.
+ *
+ * @returns {JSX.Element} MainPage component
+ */
 const MainPage = () => {
   return (
     <>

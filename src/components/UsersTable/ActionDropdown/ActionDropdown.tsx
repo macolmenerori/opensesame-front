@@ -4,6 +4,14 @@ import { useUser } from '../../../context/UserContext/UserContext';
 
 import { ActionDropdownProps } from './ActionDropdown.types';
 
+/**
+ * Action menu, cosisting of a dropdown with options to manage a user
+ *
+ * @param {User} user User to manage
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setUserModal Set the user to manage
+ *
+ * @returns {JSX.Element} ActionDropdown component
+ */
 const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
   const { user: loggedUser } = useUser();
 

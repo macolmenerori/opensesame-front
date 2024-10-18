@@ -5,6 +5,15 @@ import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { DeleteUserModalProps } from './DeleteUserModal.types';
 
+/**
+ * Modal for deleting a user
+ *
+ * @param {User | undefined} deleteUserModal User to delete
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setDeleteUserModal Set the user to delete
+ * @param {() => void} refreshData Function to refresh the data
+ *
+ * @returns {JSX.Element} DeleteUserModal component
+ */
 const DeleteUserModal = ({
   deleteUserModal,
   setDeleteUserModal,

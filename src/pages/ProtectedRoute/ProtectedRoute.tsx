@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 
-import useSWR from 'swr';
-
 import api from '../../api';
 
+/**
+ * Page that checks if the user is logged in. If they are, it renders the children components. If not, it redirects to the login page.
+ *
+ * @returns {JSX.Element} ProtectedRoute component
+ */
 const ProtectedRoute = () => {
   const [auth, setAuth] = useState<boolean | null>(null);
 

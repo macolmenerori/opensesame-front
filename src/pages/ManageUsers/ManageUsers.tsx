@@ -16,6 +16,11 @@ import SearchUserModal from '../../components/SearchUserModal/SearchUserModal';
 import UserDetailsModal from '../../components/UserDetailsModal/UserDetailsModal';
 import UsersTable from '../../components/UsersTable/UsersTable';
 
+/**
+ * Page for managing users. A table is displayed with all users, and the admin can manage their roles, permissions and passwords, and delete them.
+ *
+ * @returns {JSX.Element} ManageUsers component
+ */
 const ManageUsers = () => {
   const [page, setPage] = useState<number>(1);
   const [perPage, setPerPage] = useState<number>(10);

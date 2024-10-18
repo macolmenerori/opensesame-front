@@ -5,6 +5,15 @@ import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { UpdatePermissionsModalProps } from './UpdatePermissionsModal.types';
 
+/**
+ * Modal for updating the permissions of a user
+ *
+ * @param {User | undefined} permissionsModalUser User to update the permissions
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setPermissionsModalUser Set the user to update the permissions
+ * @param {() => void} refreshData Function to refresh the data
+ *
+ * @returns {JSX.Element} UpdatePermissionsModal component
+ */
 const UpdatePermissionsModal = ({
   permissionsModalUser,
   setPermissionsModalUser,
