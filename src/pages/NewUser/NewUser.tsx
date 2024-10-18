@@ -4,6 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import api from '../../api';
 import Navbar from '../../components/Navbar/Navbar';
 import { useToast } from '../../context/ToastContext/ToastContext';
+import { useUser } from '../../context/UserContext/UserContext';
 
 import { SignupForm } from './NewUser.types';
 
@@ -20,6 +21,7 @@ const NewUser = () => {
     reset
   } = useForm<SignupForm>();
   const { showToast } = useToast();
+  const { user: loggedUser } = useUser();
 
   const password = watch('password');
 
@@ -42,13 +44,16 @@ const NewUser = () => {
     }
   };
 
-  // TODO: show only if user is admin
-
   return (
     <>
       <Navbar />
       <div className="container">
         <h1 className="text-center mt-3">New User</h1>
+        {loggedUser?.role !== 'admin' && (
+          <h6 className="text-center text-danger mt-3">
+            <i>Only admins can sign up new users.</i>
+          </h6>
+        )}
         <div className="mt-3">
           <form onSubmit={handleSubmit(onSubmit)}>
             {/* NAME */}
@@ -60,6 +65,7 @@ const NewUser = () => {
                 className="form-control"
                 type="text"
                 id="name"
+                disabled={loggedUser?.role !== 'admin'}
                 {...register('name', {
                   required: 'Name is required',
                   pattern: {
@@ -79,6 +85,7 @@ const NewUser = () => {
                 className="form-control"
                 id="email"
                 type="email"
+                disabled={loggedUser?.role !== 'admin'}
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
@@ -98,6 +105,7 @@ const NewUser = () => {
                 className="form-select"
                 defaultValue={'user'}
                 id="role"
+                disabled={loggedUser?.role !== 'admin'}
                 {...register('role', { required: 'Role is required' })}
               >
                 <option value="user">User</option>
@@ -114,6 +122,7 @@ const NewUser = () => {
                 className="form-control"
                 id="password"
                 type="password"
+                disabled={loggedUser?.role !== 'admin'}
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -137,6 +146,7 @@ const NewUser = () => {
                 className="form-control"
                 id="confirmPassword"
                 type="password"
+                disabled={loggedUser?.role !== 'admin'}
                 {...register('passwordConfirm', {
                   required: 'Please confirm your password',
                   validate: (value) => value === password || 'Passwords do not match'
@@ -148,7 +158,11 @@ const NewUser = () => {
             </div>
             {/* SUBMIT BUTTON */}
             <div className="mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={loggedUser?.role !== 'admin'}
+              >
                 Sign Up User
               </button>
             </div>
