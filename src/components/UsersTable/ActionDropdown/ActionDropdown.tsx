@@ -1,8 +1,12 @@
 import React from 'react';
 
+import { useUser } from '../../../context/UserContext/UserContext';
+
 import { ActionDropdownProps } from './ActionDropdown.types';
 
 const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
+  const { user: loggedUser } = useUser();
+
   return (
     <div className="dropdown">
       <button
@@ -10,6 +14,7 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
         type="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
+        disabled={loggedUser?.role !== 'admin'}
       >
         Manage user
       </button>
