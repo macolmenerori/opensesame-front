@@ -3,8 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import api from '../../api';
+import { useUser } from '../../context/UserContext/UserContext';
 
 function Login() {
+  const { setUser } = useUser();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -36,6 +39,7 @@ function Login() {
     try {
       const response = await api.post('/v1/users/login', { email, password });
       if (response.status === 200) {
+        setUser(response.data.data.user);
         navigate('/mainpage'); // Redirect to the main page after login
       }
     } catch (err) {

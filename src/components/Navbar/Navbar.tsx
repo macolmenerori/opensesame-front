@@ -2,12 +2,15 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import api from '../../api';
+import { useUser } from '../../context/UserContext/UserContext';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleLogout = async () => {
     await api.delete('/v1/users/logout');
+    setUser(null);
     navigate('/login');
   };
 
