@@ -4,6 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../api';
 import { useUser } from '../../context/UserContext/UserContext';
 
+/**
+ * Navbar of the application
+ *
+ * @returns {JSX.Element} Navbar component
+ */
 const Navbar = () => {
   const navigate = useNavigate();
   const { setUser } = useUser();

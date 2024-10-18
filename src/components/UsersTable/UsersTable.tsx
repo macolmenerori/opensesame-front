@@ -3,6 +3,15 @@ import React from 'react';
 import ActionDropdown from './ActionDropdown/ActionDropdown';
 import { UsersTableProps } from './UsersTable.types';
 
+/**
+ * Main table with all users
+ *
+ * @param {User[]} data Users to display
+ * @param {React.Dispatch<React.SetStateAction<string>>} setPermissionsModalUser Set the user to display permissions
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setUserDetailsModalUser Set the user to display details
+ *
+ * @returns {JSX.Element} UsersTable component
+ */
 const UsersTable = ({
   data,
   setPermissionsModalUser,

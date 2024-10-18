@@ -5,6 +5,14 @@ import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { ChangePasswordModalProps } from './ChangePasswordModal.types';
 
+/**
+ * Modal for changing the password of a user
+ *
+ * @param {User | undefined} passwordModalUser User to change the password
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setPasswordModalUser Set the user to change the password
+ *
+ * @returns {JSX.Element} ChangePasswordModal component
+ */
 const ChangePasswordModal = ({
   passwordModalUser,
   setPasswordModalUser

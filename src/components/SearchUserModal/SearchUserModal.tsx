@@ -8,6 +8,13 @@ import { useToast } from '../../context/ToastContext/ToastContext';
 import SearchUserTable from './SearchUserTable/SearchUserTable';
 import { SearchUserModalProps } from './SearchUserModal.types';
 
+/**
+ * Modal for searching users by name
+ *
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setUserDetailsModalUser Set the user to show details
+ *
+ * @returns {JSX.Element} SearchUserModal component
+ */
 const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
   const { showToast } = useToast();
 

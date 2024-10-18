@@ -2,6 +2,17 @@ import React from 'react';
 
 import { PaginationProps } from './Pagination.types';
 
+/**
+ * Pagination component
+ *
+ * @param {number} currentPage Current page
+ * @param {number} totalPages Total pages
+ * @param {number} perPage Results per page
+ * @param {React.Dispatch<React.SetStateAction<number>>} setPage Set the current page
+ * @param {React.Dispatch<React.SetStateAction<number>>} setPerPage Set the results per page
+ *
+ * @returns {JSX.Element} Pagination component
+ */
 const Pagination = ({ currentPage, totalPages, perPage, setPage, setPerPage }: PaginationProps) => {
   return (
     <div className="container mt-3">

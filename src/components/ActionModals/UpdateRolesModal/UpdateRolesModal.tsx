@@ -5,6 +5,15 @@ import { useToast } from '../../../context/ToastContext/ToastContext';
 
 import { UpdateRolesModalProps } from './UpdateRolesModal.types';
 
+/**
+ * Modal for updating the role of a user
+ *
+ * @param {User | undefined} roleModalUser User to update the role
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setRoleModalUser Set the user to update the role
+ * @param {() => void} refreshData Function to refresh the data
+ *
+ * @returns {JSX.Element} UpdateRolesModal component
+ */
 const UpdateRolesModal = ({
   roleModalUser,
   setRoleModalUser,

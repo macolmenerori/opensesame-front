@@ -2,8 +2,16 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import Navbar from '../../components/Navbar/Navbar';
+import { useUser } from '../../context/UserContext/UserContext';
 
+/**
+ * Main page once the user is logged in. Contains links to Manage Users page and Create User page.
+ *
+ * @returns {JSX.Element} MainPage component
+ */
 const MainPage = () => {
+  const { user: loggedUser } = useUser();
+
   return (
     <>
       <Navbar />
@@ -25,7 +33,11 @@ const MainPage = () => {
             <NavLink className={'text-decoration-none'} to={'/newuser'}>
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title text-primary">New user</h5>
+                  <h5
+                    className={`card-title ${loggedUser?.role === 'admin' ? 'text-primary' : 'text-secondary'}`}
+                  >
+                    {`New user ${loggedUser?.role === 'admin' ? '' : '(admin only)'}`}
+                  </h5>
                   <p className="card-text">
                     Sign up a new user, assign roles and permissions and set their password.
                   </p>

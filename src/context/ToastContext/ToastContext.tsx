@@ -7,6 +7,11 @@ import { ToastContextType, ToastProviderProps } from './ToastContext.types';
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
+/**
+ * Access the toast context, for displaying messages on a toast
+ *
+ * @returns {ToastContextType} Toast context
+ */
 export const useToast = () => {
   const context = useContext(ToastContext);
 
@@ -17,6 +22,13 @@ export const useToast = () => {
   return context;
 };
 
+/**
+ * Provider for the toast context
+ *
+ * @param {ToastProviderProps} children Children of the provider
+ *
+ * @returns {JSX.Element} ToastProvider component
+ */
 export const ToastProvider = ({ children }: ToastProviderProps) => {
   const [toast, setToast] = useState<StatusToastAttributes | null>(null);
 

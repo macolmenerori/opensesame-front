@@ -2,6 +2,14 @@ import React from 'react';
 
 import { UserDetailsModalProps } from './UserDetailsModal.types';
 
+/**
+ * Modal for displaying user details
+ *
+ * @param {User | undefined} user User to display details
+ * @param {React.Dispatch<React.SetStateAction<User | undefined>>} setUserDetailsModalUser Set the user to display details
+ *
+ * @returns {JSX.Element} UserDetailsModal component
+ */
 const UserDetailsModal = ({ user, setUserDetailsModalUser }: UserDetailsModalProps) => {
   return (
     <div>

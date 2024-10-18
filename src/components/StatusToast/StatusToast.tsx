@@ -2,6 +2,16 @@ import React, { useEffect } from 'react';
 
 import { StatusToastProps } from './StatusToast.types';
 
+/**
+ * Toast component to show status messages when an action is performed
+ *
+ * @param {string} title Title of the toast
+ * @param {string} message Message of the toast
+ * @param {'sucess' | 'danger'} type Type of the toast: 'success' or 'danger'
+ * @param {() => void} onClose Function to close the toast
+ *
+ * @returns {JSX.Element} StatusToast component
+ */
 const StatusToast = ({ title, message, type, onClose }: StatusToastProps) => {
   const timeout = 5000; // 5 seconds
 
