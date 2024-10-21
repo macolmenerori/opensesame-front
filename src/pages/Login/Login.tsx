@@ -69,6 +69,7 @@ function Login() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="form-control"
+                data-testid="emailInput"
                 required
               />
             </div>
@@ -79,11 +80,12 @@ function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="form-control"
+                data-testid="passwordInput"
                 required
               />
             </div>
             {error && <p style={{ color: 'red' }}>{error}</p>}
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" data-testid="submitButton">
               Login
             </button>
           </form>
