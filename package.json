@@ -12,7 +12,7 @@
     "prettify": "prettier -w --log-level=silent src/",
     "lint": "eslint --fix .",
     "types": "tsc --noEmit",
-    "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn build"
+    "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn test && yarn build"
   },
   "dependencies": {
     "axios": "^1.7.7",
