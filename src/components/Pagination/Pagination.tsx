@@ -15,7 +15,7 @@ import { PaginationProps } from './Pagination.types';
  */
 const Pagination = ({ currentPage, totalPages, perPage, setPage, setPerPage }: PaginationProps) => {
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" data-testid="pagination-component">
       <div className="row">
         {/* PERPAGE DROPDOWN */}
         <div className="col dropdown justify-content-end">

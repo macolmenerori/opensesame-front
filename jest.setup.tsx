@@ -22,6 +22,11 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedUsedNavigate
 }));
 
+jest.mock('react-hook-form', () => ({
+  ...jest.requireActual('react-hook-form'),
+  useForm: jest.fn()
+}));
+
 window.IntersectionObserver = jest.fn(() => ({
   observe: jest.fn(),
   unobserve: jest.fn(),

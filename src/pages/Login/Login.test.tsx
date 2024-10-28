@@ -6,8 +6,6 @@ import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
 
-// Mock User Context
-jest.mock('../../context/UserContext/UserContext');
 const mockSetUser = jest.fn(); // Mock the setUser function
 jest.mock('../../context/UserContext/UserContext', () => ({
   user: {

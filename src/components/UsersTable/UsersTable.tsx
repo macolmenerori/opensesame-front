@@ -27,6 +27,7 @@ const UsersTable = ({
         className="text-secondary text-center"
         data-bs-toggle="modal"
         data-bs-target="#permissionsModal"
+        data-testid="permissions-button"
         onClick={() => setPermissionsModalUser(user.email)}
       >
         {user.permissions.join(', ').substring(0, 15) + '...'}
