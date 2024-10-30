@@ -174,7 +174,4 @@ describe('ManageUsers Component', () => {
       expect(screen.getByText('Marty McFly')).toBeInTheDocument();
     });
   });
-
-  // Check actions modals
-  // TODO:
 });

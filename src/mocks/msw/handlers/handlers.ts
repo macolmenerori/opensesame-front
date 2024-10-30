@@ -1,5 +1,7 @@
 import { rest } from 'msw';
 
+import { UpdatePasswordBody } from '../../../components/ActionModals/ChangePasswordModal/ChangePasswordModal.types';
+
 import { allusers } from './../../index';
 
 export const handlers = [
@@ -79,5 +81,36 @@ export const handlers = [
         }
       })
     );
+  }),
+  // Mock the /v1/users/permissions API to return a successful update if password == 'passwordSuccess'
+  rest.post('http://localhost:8080/api/v1/users/changeUserPassword', (req, res, ctx) => {
+    const { newPassword } = req.body as UpdatePasswordBody;
+    if (newPassword === 'passwordSuccess') {
+      return res(ctx.status(200), ctx.json({ message: 'Password changed' }));
+    } else {
+      return res(ctx.status(400), ctx.json({ message: 'Password not changed' }));
+    }
+  }),
+  // Mock the /v1/users/permissions API to return a successful update
+  rest.delete('http://localhost:8080/api/v1/users/delete', (req, res, ctx) => {
+    return res(ctx.status(204));
+  }),
+  // Mock the /v1/users/permissions API to return a successful update if permissions == ['PermissionSuccess']
+  rest.put('http://localhost:8080/api/v1/users/permissions', (req, res, ctx) => {
+    const { permissions } = req.body as { email: string; permissions: string[] };
+    if (permissions.includes('PermissionSuccess')) {
+      return res(ctx.status(200));
+    } else {
+      return res(ctx.status(400));
+    }
+  }),
+  // Mock the /v1/users/roles API to return a successful update if email == 'marty@test.com'
+  rest.put('http://localhost:8080/api/v1/users/roles', (req, res, ctx) => {
+    const { email } = req.body as { email: string };
+    if (email === 'marty@test.com') {
+      return res(ctx.status(200));
+    } else {
+      return res(ctx.status(400));
+    }
   })
 ];

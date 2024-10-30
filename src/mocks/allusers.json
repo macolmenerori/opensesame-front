@@ -18,7 +18,7 @@
     "name": "Marty McFly",
     "email": "marty@test.com",
     "role": "user",
-    "permissions": ["permiso33"]
+    "permissions": ["permission33"]
   },
   {
     "_id": "66f12d5aba2e1b4a0ac6e70d",
