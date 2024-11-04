@@ -95,6 +95,7 @@ const UpdatePermissionsModal = ({
                     className="form-control"
                     aria-label="With textarea"
                     value={permissions}
+                    data-testid="permissions-textarea"
                     onChange={(e) => setPermissions(e.target.value)}
                   />
                 ) : null}

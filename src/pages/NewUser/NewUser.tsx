@@ -55,7 +55,7 @@ const NewUser = () => {
           </h6>
         )}
         <div className="mt-3">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} data-testid="new-user-form">
             {/* NAME */}
             <div>
               <label className="form-label" htmlFor="name">
@@ -66,6 +66,7 @@ const NewUser = () => {
                 type="text"
                 id="name"
                 disabled={loggedUser?.role !== 'admin'}
+                data-testid="name-input"
                 {...register('name', {
                   required: 'Name is required',
                   pattern: {
@@ -86,6 +87,7 @@ const NewUser = () => {
                 id="email"
                 type="email"
                 disabled={loggedUser?.role !== 'admin'}
+                data-testid="email-input"
                 {...register('email', {
                   required: 'Email is required',
                   pattern: {
@@ -106,6 +108,7 @@ const NewUser = () => {
                 defaultValue={'user'}
                 id="role"
                 disabled={loggedUser?.role !== 'admin'}
+                data-testid="role-select"
                 {...register('role', { required: 'Role is required' })}
               >
                 <option value="user">User</option>
@@ -123,6 +126,7 @@ const NewUser = () => {
                 id="password"
                 type="password"
                 disabled={loggedUser?.role !== 'admin'}
+                data-testid="password-input"
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -147,6 +151,7 @@ const NewUser = () => {
                 id="confirmPassword"
                 type="password"
                 disabled={loggedUser?.role !== 'admin'}
+                data-testid="confirm-password-input"
                 {...register('passwordConfirm', {
                   required: 'Please confirm your password',
                   validate: (value) => value === password || 'Passwords do not match'

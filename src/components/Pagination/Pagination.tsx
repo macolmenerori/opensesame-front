@@ -15,7 +15,7 @@ import { PaginationProps } from './Pagination.types';
  */
 const Pagination = ({ currentPage, totalPages, perPage, setPage, setPerPage }: PaginationProps) => {
   return (
-    <div className="container mt-3">
+    <div className="container mt-3" data-testid="pagination-component">
       <div className="row">
         {/* PERPAGE DROPDOWN */}
         <div className="col dropdown justify-content-end">
@@ -24,6 +24,7 @@ const Pagination = ({ currentPage, totalPages, perPage, setPage, setPerPage }: P
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            data-testid="perpage-dropdown"
           >
             {`${perPage} results per page`}
           </button>

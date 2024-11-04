@@ -98,6 +98,7 @@ const UpdateRolesModal = ({
               <select
                 className="form-select"
                 aria-label="Default select example"
+                data-testid="role-select"
                 onChange={(e) => setRole(e.target.value)}
                 value={role}
               >

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import api from '../../../api';
 import { useToast } from '../../../context/ToastContext/ToastContext';
 
-import { ChangePasswordModalProps } from './ChangePasswordModal.types';
+import { ChangePasswordModalProps, UpdatePasswordBody } from './ChangePasswordModal.types';
 
 /**
  * Modal for changing the password of a user
@@ -35,7 +35,7 @@ const ChangePasswordModal = ({
       return;
     }
 
-    const updateBody = {
+    const updateBody: UpdatePasswordBody = {
       email: passwordModalUser.email,
       newPassword,
       newPasswordConfirm

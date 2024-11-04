@@ -23,6 +23,7 @@ const ActionDropdown = ({ user, setUserModal }: ActionDropdownProps) => {
         data-bs-toggle="dropdown"
         aria-expanded="false"
         disabled={loggedUser?.role !== 'admin'}
+        data-testid="action-dropdown-button"
       >
         Manage user
       </button>

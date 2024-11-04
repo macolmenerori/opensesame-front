@@ -56,6 +56,7 @@ const ManageUsers = () => {
               className="btn btn-secondary btn-sm mb-3"
               data-bs-toggle="modal"
               data-bs-target="#searchUserModal"
+              data-testid="search-user-modal-button"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

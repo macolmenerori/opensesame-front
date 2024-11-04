@@ -82,7 +82,12 @@ const DeleteUserModal = ({
                 >
                   Don&#39;t delete
                 </button>
-                <button type="button" className="btn btn-danger" onClick={handleDeleteUser}>
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleDeleteUser}
+                  data-testid="delete-user-modal-button"
+                >
                   Delete user
                 </button>
               </div>
