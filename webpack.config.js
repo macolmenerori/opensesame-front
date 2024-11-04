@@ -3,6 +3,8 @@ const prod = process.env.NODE_ENV === 'production';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { redirect } = require('react-router-dom');
+const webpack = require('webpack');
+const dotenv = require('dotenv').config();
 
 module.exports = {
   mode: prod ? 'production' : 'development',
@@ -37,6 +39,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     }),
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    })
   ]
 };

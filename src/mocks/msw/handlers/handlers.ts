@@ -4,14 +4,15 @@ import { UpdatePasswordBody } from '../../../components/ActionModals/ChangePassw
 
 import { allusers } from './../../index';
 
+const baseURL = process.env.BASE_URL_API;
+
 export const handlers = [
-  // TODO: URL env var on all files
   // Mock the /v1/users/isloggedin API to return a not logged in state
-  rest.get('http://localhost:8080/api/v1/users/isloggedin', (req, res, ctx) => {
+  rest.get(`${baseURL}/v1/users/isloggedin`, (req, res, ctx) => {
     return res(ctx.status(401)); // Simulate user not logged in, so auth is set to false
   }),
   // Mock the /v1/users/login API to return a successful login
-  rest.post('http://localhost:8080/api/v1/users/login', (req, res, ctx) => {
+  rest.post(`${baseURL}/v1/users/login`, (req, res, ctx) => {
     const { email, password } = req.body as { email: string; password: string };
 
     if (email === 'test@example.com' && password === 'password123') {
@@ -23,11 +24,11 @@ export const handlers = [
     return res(ctx.status(401), ctx.json({ message: 'Invalid credentials' }));
   }),
   // Mock the /v1/users/signup API to return a successful signup
-  rest.post('http://localhost:8080/api/v1/users/signup', (req, res, ctx) => {
+  rest.post(`${baseURL}/v1/users/signup`, (req, res, ctx) => {
     return res(ctx.status(201), ctx.json({ message: 'User created' }));
   }),
   // Mock the /v1/users/allusers API to return a list of users
-  rest.get('http://localhost:8080/api/v1/users/allusers', (req, res, ctx) => {
+  rest.get(`${baseURL}/v1/users/allusers`, (req, res, ctx) => {
     const page = Number(req.url.searchParams.get('page')) || 1;
     const perPage = Number(req.url.searchParams.get('perpage')) || 5;
     const data = allusers.slice((page - 1) * perPage, page * perPage);
@@ -48,7 +49,7 @@ export const handlers = [
     );
   }),
   // Mock the /v1/users/searchbyname API to return a list of users
-  rest.get('http://localhost:8080/api/v1/users/searchbyname', (req, res, ctx) => {
+  rest.get(`${baseURL}/v1/users/searchbyname`, (req, res, ctx) => {
     const query = req.url.searchParams.get('name') || '';
     const page = Number(req.url.searchParams.get('page')) || 1;
     const perPage = Number(req.url.searchParams.get('perpage')) || 5;
@@ -70,7 +71,7 @@ export const handlers = [
     );
   }),
   // Mock the /v1/users/changeUserPassword API to return a successful update if password == 'passwordSuccess'
-  rest.post('http://localhost:8080/api/v1/users/changeUserPassword', (req, res, ctx) => {
+  rest.post(`${baseURL}/v1/users/changeUserPassword`, (req, res, ctx) => {
     const { newPassword } = req.body as UpdatePasswordBody;
     if (newPassword === 'passwordSuccess') {
       return res(ctx.status(200), ctx.json({ message: 'Password changed' }));
@@ -79,11 +80,11 @@ export const handlers = [
     }
   }),
   // Mock the /v1/users/delete API to return a successful update
-  rest.delete('http://localhost:8080/api/v1/users/delete', (req, res, ctx) => {
+  rest.delete(`${baseURL}/v1/users/delete`, (req, res, ctx) => {
     return res(ctx.status(204));
   }),
   // Mock the /v1/users/permissions API to return a successful update if permissions == ['PermissionSuccess']
-  rest.put('http://localhost:8080/api/v1/users/permissions', (req, res, ctx) => {
+  rest.put(`${baseURL}/v1/users/permissions`, (req, res, ctx) => {
     const { permissions } = req.body as { email: string; permissions: string[] };
     if (permissions.includes('PermissionSuccess')) {
       return res(ctx.status(200));
@@ -92,7 +93,7 @@ export const handlers = [
     }
   }),
   // Mock the /v1/users/permissions API to return a successful update if email != 'wronguser@test.com'
-  rest.get('http://localhost:8080/api/v1/users/permissions', (req, res, ctx) => {
+  rest.get(`${baseURL}/v1/users/permissions`, (req, res, ctx) => {
     const email = req.url.searchParams.get('email') || '';
     if (email === 'wronguser@test.com') {
       return res(ctx.status(404));
@@ -121,7 +122,7 @@ export const handlers = [
     }
   }),
   // Mock the /v1/users/roles API to return a successful update if email == 'marty@test.com'
-  rest.put('http://localhost:8080/api/v1/users/roles', (req, res, ctx) => {
+  rest.put(`${baseURL}/v1/users/roles`, (req, res, ctx) => {
     const { email } = req.body as { email: string };
     if (email === 'marty@test.com') {
       return res(ctx.status(200));
@@ -130,11 +131,11 @@ export const handlers = [
     }
   }),
   // Mock the /v1/users/logout API to return a successful logout
-  rest.delete('http://localhost:8080/api/v1/users/logout', (req, res, ctx) => {
+  rest.delete('${baseURL}/v1/users/logout', (req, res, ctx) => {
     return res(ctx.status(200));
   }),
   // Mock the /v1/users/searchbyname API to return a list of users
-  rest.get('http://localhost:8080/api/v1/users/searchbyname', (req, res, ctx) => {
+  rest.get(`${baseURL}/v1/users/searchbyname`, (req, res, ctx) => {
     const query = req.url.searchParams.get('name') || '';
     const page = Number(req.url.searchParams.get('page')) || 1;
     const perPage = Number(req.url.searchParams.get('perpage')) || 5;
