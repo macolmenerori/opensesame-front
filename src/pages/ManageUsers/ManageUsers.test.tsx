@@ -108,7 +108,7 @@ describe('ManageUsers Component', () => {
 
     // Wait for the modal to load the user permissions
     await waitFor(() => {
-      expect(screen.getByText('Permission1')).toBeInTheDocument();
+      expect(screen.getByText('Permission1...')).toBeInTheDocument();
     });
   });
 

@@ -24,6 +24,7 @@ const Pagination = ({ currentPage, totalPages, perPage, setPage, setPerPage }: P
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
+            data-testid="perpage-dropdown"
           >
             {`${perPage} results per page`}
           </button>
