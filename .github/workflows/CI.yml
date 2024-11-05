@@ -1,5 +1,9 @@
 name: Integration Tests
 
+env:
+  NODE_ENV: ${{ vars.NODE_ENV }}
+  BASE_URL_API: ${{ vars.BASE_URL_API }}
+
 on:
   push:
     branches: [master]
