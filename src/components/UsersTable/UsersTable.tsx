@@ -22,15 +22,20 @@ const UsersTable = ({
       <td>{user.name}</td>
       <td className="text-secondary">{user.email}</td>
       <td className="text-secondary text-center">{user.role}</td>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions*/}
+      {}
       <td
         className="text-secondary text-center"
         data-bs-toggle="modal"
         data-bs-target="#permissionsModal"
-        data-testid="permissions-button"
-        onClick={() => setPermissionsModalUser(user.email)}
       >
-        {user.permissions.join(', ').substring(0, 15) + '...'}
+        <button
+          type="button"
+          className="border-0 text-secondary bg-transparent"
+          onClick={() => setPermissionsModalUser(user.email)}
+          data-testid="permissions-button"
+        >
+          {user.permissions.join(', ').substring(0, 15) + '...'}
+        </button>
       </td>
       <td className="text-secondary text-center">
         <button
