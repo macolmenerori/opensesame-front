@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { redirect } = require('react-router-dom');
 const webpack = require('webpack');
 const dotenv = require('dotenv').config();
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
@@ -42,6 +43,11 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(process.env)
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/.htaccess', to: '.' } // Copy `.htaccess` to the build folder
+      ]
     })
   ]
 };
