@@ -1,9 +1,10 @@
-FROM node:20-alpine
-LABEL app="opensesame-front" stack.binary="node" stack.version="20-alpine"
+FROM node:22-alpine
+LABEL app="opensesame-front" stack.binary="node" stack.version="22-alpine"
 
 WORKDIR /usr/app
 
-COPY .env ./
+# Dockerfile config.env* means that if no config.env file is present, Dockerfile will be copied instead
+COPY Dockerfile .env* ./
 COPY src src
 COPY public public
 COPY package.json ./
