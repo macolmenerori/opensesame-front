@@ -1,4 +1,5 @@
 import { setupServer } from 'msw/node';
+import { TextEncoder } from 'util';
 
 import '@testing-library/jest-dom';
 
@@ -26,6 +27,8 @@ jest.mock('react-hook-form', () => ({
   ...jest.requireActual('react-hook-form'),
   useForm: jest.fn()
 }));
+
+global.TextEncoder = TextEncoder;
 
 window.IntersectionObserver = jest.fn(() => ({
   observe: jest.fn(),
