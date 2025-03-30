@@ -17,9 +17,9 @@ Object.defineProperty(window, 'scrollTo', { value: noop, writable: true });
 
 // Mock the useNavigate hook
 const mockedUsedNavigate = jest.fn();
-jest.mock('react-router-dom', () => ({
+jest.mock('react-router', () => ({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ...(jest.requireActual('react-router-dom') as any),
+  ...(jest.requireActual('react-router') as any),
   useNavigate: () => mockedUsedNavigate
 }));
 
