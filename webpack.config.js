@@ -2,7 +2,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { redirect } = require('react-router-dom');
+const { redirect } = require('react-router');
 const webpack = require('webpack');
 const dotenv = require('dotenv').config();
 const CopyPlugin = require('copy-webpack-plugin');
