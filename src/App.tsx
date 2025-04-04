@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { createBrowserRouter, RouterProvider } from 'react-router';
 
 import { ToastProvider } from './context/ToastContext/ToastContext';
 import { UserProvider } from './context/UserContext/UserContext';
@@ -9,23 +9,49 @@ const ManageUsers = React.lazy(() => import('./pages/ManageUsers/ManageUsers'));
 const NewUser = React.lazy(() => import('./pages/NewUser/NewUser'));
 const ProtectedRoute = React.lazy(() => import('./pages/ProtectedRoute/ProtectedRoute'));
 
+const LoadingFallback = () => <div>Loading...</div>;
+
+const lazyLoad = (Component: React.LazyExoticComponent<any>) => {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <Component />
+    </Suspense>
+  );
+};
+
+const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: lazyLoad(Login)
+  },
+  {
+    element: lazyLoad(ProtectedRoute),
+    children: [
+      {
+        path: '/',
+        element: lazyLoad(MainPage)
+      },
+      {
+        path: '/mainpage',
+        element: lazyLoad(MainPage)
+      },
+      {
+        path: '/manageusers',
+        element: lazyLoad(ManageUsers)
+      },
+      {
+        path: '/newuser',
+        element: lazyLoad(NewUser)
+      }
+    ]
+  }
+]);
+
 const App = () => {
   return (
     <ToastProvider>
       <UserProvider>
-        <BrowserRouter>
-          <Suspense fallback={<p>Loading...</p>}>
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route element={<ProtectedRoute />}>
-                <Route path="/" element={<MainPage />} />
-                <Route path="/mainpage" element={<MainPage />} />
-                <Route path="/manageusers" element={<ManageUsers />} />
-                <Route path="/newuser" element={<NewUser />} />
-              </Route>
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
+        <RouterProvider router={router} />
       </UserProvider>
     </ToastProvider>
   );
