@@ -21,7 +21,7 @@
     "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn test && yarn build"
   },
   "dependencies": {
-    "axios": "^1.10.0",
+    "axios": "^1.11.0",
     "dotenv": "^17.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -44,7 +44,7 @@
     "@types/react-dom": "^19.1.6",
     "@typescript-eslint/eslint-plugin": "^8.36.0",
     "@typescript-eslint/parser": "^8.37.0",
-    "babel-jest": "^30.0.4",
+    "babel-jest": "^30.0.5",
     "copy-webpack-plugin": "^13.0.0",
     "css-loader": "^7.1.2",
     "eslint": "^9.31.0",
