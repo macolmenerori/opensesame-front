@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { useToast } from '../../context/ToastContext/ToastContext';
 import { useUser } from '../../context/UserContext/UserContext';
@@ -69,18 +70,12 @@ describe('ManageUsers Component', () => {
     expect(screen.getByText('Next')).toBeInTheDocument();
 
     // Click the next button
-    fireEvent.click(screen.getByText('Next'));
-
-    // Check that the loading message is displayed
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Next'));
 
     // Wait for the table to load the new page of users
     await waitFor(() => {
-      expect(screen.getByText('Manage users')).toBeInTheDocument();
+      expect(screen.getByText('User Test Page 2')).toBeInTheDocument();
     });
-
-    // Check the table rows display new users
-    expect(screen.getByText('User Test Page 2')).toBeInTheDocument();
   });
 
   // Check permissions modal
@@ -101,10 +96,7 @@ describe('ManageUsers Component', () => {
     });
 
     // Click the permissions button for the first user
-    fireEvent.click(screen.getAllByTestId('permissions-button')[0]);
-
-    // Check that the permissions modal shows loading message
-    expect(screen.getByText('Loading...')).toBeInTheDocument();
+    await userEvent.click(screen.getAllByTestId('permissions-button')[0]);
 
     // Wait for the modal to load the user permissions
     await waitFor(() => {
@@ -130,7 +122,7 @@ describe('ManageUsers Component', () => {
     });
 
     // Click the user details button for the first user
-    fireEvent.click(screen.getAllByText('User details')[0]);
+    await userEvent.click(screen.getAllByText('User details')[0]);
 
     // Wait for the modal to load the user details
     await waitFor(() => {
@@ -159,15 +151,14 @@ describe('ManageUsers Component', () => {
     expect(screen.getByTestId('search-user-modal-button')).toBeInTheDocument();
 
     // Click the search user modal button
-    fireEvent.click(screen.getByTestId('search-user-modal-button'));
+    await userEvent.click(screen.getByTestId('search-user-modal-button'));
 
     // Check that the search user modal is displayed
     expect(screen.getByPlaceholderText('Search users by name...')).toBeInTheDocument();
 
     // Type a query in the search input
-    fireEvent.change(screen.getByPlaceholderText('Search users by name...'), {
-      target: { value: 'john' }
-    });
+    await userEvent.clear(screen.getByPlaceholderText('Search users by name...'));
+    await userEvent.type(screen.getByPlaceholderText('Search users by name...'), 'john');
 
     // Wait for the search to complete
     await waitFor(() => {

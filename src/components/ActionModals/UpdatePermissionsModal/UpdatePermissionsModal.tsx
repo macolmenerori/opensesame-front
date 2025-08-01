@@ -56,6 +56,7 @@ const UpdatePermissionsModal = ({
       } else {
         showToast({ title: 'Error', message: 'Permissions where not updated', type: 'danger' });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       showToast({ title: 'Error', message: 'Permissions where not updated', type: 'danger' });
     }

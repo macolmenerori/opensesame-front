@@ -26,6 +26,7 @@ function Login() {
       try {
         await api.get('/v1/users/isloggedin');
         setAuth(true);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setAuth(false);
       }
@@ -49,6 +50,7 @@ function Login() {
         setUser(response.data.data.user);
         navigate('/mainpage'); // Redirect to the main page after login
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError('Invalid credentials');
     }

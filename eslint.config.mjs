@@ -100,7 +100,17 @@ export default [
       ],
 
       'no-console': 'warn',
-      'no-useless-escape': 'warn'
+      'no-useless-escape': 'warn',
+
+      // Testing Library rule overrides
+      'testing-library/prefer-user-event': 'error',
+      'testing-library/no-node-access': 'off', // Turn off if it's causing issues with userEvent
+      'testing-library/prefer-screen-queries': 'error',
+      'testing-library/no-container': 'error',
+      'testing-library/no-debugging-utils': 'warn',
+      'testing-library/no-dom-import': ['error', 'react'],
+      'testing-library/no-wait-for-multiple-assertions': 'error',
+      'testing-library/prefer-find-by': 'error'
     }
   },
   {

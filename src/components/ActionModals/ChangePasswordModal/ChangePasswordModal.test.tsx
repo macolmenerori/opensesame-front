@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../../api';
 import { User } from '../../../common/types/User.types';
@@ -42,7 +43,7 @@ describe('ChangePasswordModal', () => {
     expect(screen.getByText(mockUser.email)).toBeInTheDocument();
   });
 
-  it('shows error message when passwords do not match', () => {
+  it('shows error message when passwords do not match', async () => {
     render(
       <ChangePasswordModal
         passwordModalUser={mockUser}
@@ -51,15 +52,15 @@ describe('ChangePasswordModal', () => {
     );
 
     // Insert new password
-    fireEvent.change(screen.getByLabelText('New password:'), { target: { value: 'password1' } });
+    await userEvent.clear(screen.getByLabelText('New password:'));
+    await userEvent.type(screen.getByLabelText('New password:'), 'password1');
 
     // Insert new password confirmation, but different to trigger error
-    fireEvent.change(screen.getByLabelText('Confirm new password:'), {
-      target: { value: 'password2' }
-    });
+    await userEvent.clear(screen.getByLabelText('Confirm new password:'));
+    await userEvent.type(screen.getByLabelText('Confirm new password:'), 'password2');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the error message is shown
     expect(screen.getByText('Passwords do not match')).toBeInTheDocument();
@@ -77,17 +78,15 @@ describe('ChangePasswordModal', () => {
     );
 
     // Insert new password
-    fireEvent.change(screen.getByLabelText('New password:'), {
-      target: { value: 'passwordSuccess' }
-    });
+    await userEvent.clear(screen.getByLabelText('New password:'));
+    await userEvent.type(screen.getByLabelText('New password:'), 'passwordSuccess');
 
     // Insert new password confirmation
-    fireEvent.change(screen.getByLabelText('Confirm new password:'), {
-      target: { value: 'passwordSuccess' }
-    });
+    await userEvent.clear(screen.getByLabelText('Confirm new password:'));
+    await userEvent.type(screen.getByLabelText('Confirm new password:'), 'passwordSuccess');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check API call
     expect(mockApiPost).toHaveBeenCalledWith(
@@ -125,15 +124,15 @@ describe('ChangePasswordModal', () => {
     );
 
     // Insert new password
-    fireEvent.change(screen.getByLabelText('New password:'), { target: { value: 'password1' } });
+    await userEvent.clear(screen.getByLabelText('New password:'));
+    await userEvent.type(screen.getByLabelText('New password:'), 'password1');
 
     // Insert new password confirmation
-    fireEvent.change(screen.getByLabelText('Confirm new password:'), {
-      target: { value: 'password1' }
-    });
+    await userEvent.clear(screen.getByLabelText('Confirm new password:'));
+    await userEvent.type(screen.getByLabelText('Confirm new password:'), 'password1');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the error toast was shown
     await waitFor(() => {

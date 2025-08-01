@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { User } from '../../../common/types/User.types';
 import { allusers } from '../../../mocks';
@@ -34,10 +35,10 @@ describe('SearchUserTable', () => {
     expect(screen.getByText('drbrown@test.com')).toBeInTheDocument();
   });
 
-  it('should call setUserDetailsModalUser with the correct user when "User details" button is clicked', () => {
+  it('should call setUserDetailsModalUser with the correct user when "User details" button is clicked', async () => {
     renderComponent({ users: mockUsers as User[] });
     const userDetailsButtons = screen.getAllByText('User details');
-    fireEvent.click(userDetailsButtons[0]);
+    await userEvent.click(userDetailsButtons[0]);
     expect(mockSetUserDetailsModalUser).toHaveBeenCalledWith(mockUsers[0]);
   });
 });

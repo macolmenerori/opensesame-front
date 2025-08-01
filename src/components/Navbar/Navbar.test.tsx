@@ -1,7 +1,8 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../api';
 import { useUser } from '../../context/UserContext/UserContext';
@@ -39,7 +40,7 @@ describe('Navbar', () => {
     );
 
     const logoutButton = screen.getByRole('button', { name: /logout/i });
-    fireEvent.click(logoutButton);
+    await userEvent.click(logoutButton);
 
     await waitFor(() => {
       expect(api.delete).toHaveBeenCalledWith('/v1/users/logout');
