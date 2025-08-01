@@ -47,13 +47,14 @@ const SearchUserModal = ({ setUserDetailsModalUser }: SearchUserModalProps) => {
         showToast({ title: 'Error', message: 'Error searching for users', type: 'danger' });
         setUsers([]);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       showToast({ title: 'Error', message: 'Error searching for users', type: 'danger' });
       setUsers([]);
     } finally {
       setLoading(false);
     }
-  }, [query]);
+  }, [query, showToast]);
 
   // Debounce: API will be called 1.3 seconds after user stops typing
   useEffect(() => {

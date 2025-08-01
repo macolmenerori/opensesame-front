@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../../api';
 import { User } from '../../../common/types/User.types';
@@ -57,7 +58,7 @@ describe('DeleteUserModal', () => {
     );
 
     // Click the delete button
-    fireEvent.click(screen.getByTestId('delete-user-modal-button'));
+    await userEvent.click(screen.getByTestId('delete-user-modal-button'));
 
     // Check that the API was called and the toast was shown
     await waitFor(() => {
@@ -86,7 +87,7 @@ describe('DeleteUserModal', () => {
     );
 
     // Click the delete button
-    fireEvent.click(screen.getByTestId('delete-user-modal-button'));
+    await userEvent.click(screen.getByTestId('delete-user-modal-button'));
 
     // Check that the API was called and the toast was shown
     await waitFor(() => {

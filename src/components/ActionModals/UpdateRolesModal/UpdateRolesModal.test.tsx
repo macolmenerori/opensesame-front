@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../../api';
 import { useToast } from '../../../context/ToastContext/ToastContext';
@@ -29,7 +30,7 @@ describe('UpdateRolesModal', () => {
   });
 
   // UpdateRolesModal to be rendered with user details
-  const renderComponent = (roleModalUser: any) => {
+  const renderComponent = (roleModalUser: User) => {
     render(
       <UpdateRolesModal
         roleModalUser={roleModalUser}
@@ -52,14 +53,14 @@ describe('UpdateRolesModal', () => {
     expect(screen.getByTestId('role-select')).toBeInTheDocument();
   });
 
-  it('should update role state when select value changes', () => {
+  it('should update role state when select value changes', async () => {
     // Mock the user
     const roleModalUser = allusers[2] as User;
 
     renderComponent(roleModalUser);
 
     // Change the role
-    fireEvent.change(screen.getByTestId('role-select'), { target: { value: 'admin' } });
+    await userEvent.selectOptions(screen.getByTestId('role-select'), 'admin');
 
     // Check that the role state is updated
     expect(screen.getByDisplayValue('Admin')).toBeInTheDocument();
@@ -73,10 +74,10 @@ describe('UpdateRolesModal', () => {
     renderComponent(roleModalUser);
 
     // Change the role
-    fireEvent.change(screen.getByTestId('role-select'), { target: { value: 'admin' } });
+    await userEvent.selectOptions(screen.getByTestId('role-select'), 'admin');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the API was called with the correct data
     await waitFor(() => {
@@ -109,10 +110,10 @@ describe('UpdateRolesModal', () => {
     renderComponent(roleModalUser);
 
     // Change the role
-    fireEvent.change(screen.getByTestId('role-select'), { target: { value: 'user' } });
+    await userEvent.selectOptions(screen.getByTestId('role-select'), 'user');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the API was called with the correct data
     await waitFor(() => {

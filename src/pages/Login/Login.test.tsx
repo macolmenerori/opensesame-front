@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter } from 'react-router';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
@@ -48,7 +48,7 @@ describe('Login', () => {
     await userEvent.type(passwordInput, 'password123');
 
     // Simulate form submission by clicking the login button
-    fireEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
     // Wait for the success response and assert that setUser and navigate are called
     await waitFor(() => {
@@ -84,7 +84,7 @@ describe('Login', () => {
     await userEvent.type(passwordInput, 'wrongpassword');
 
     // Simulate form submission by clicking the login button
-    fireEvent.click(submitButton);
+    await userEvent.click(submitButton);
 
     // Wait for the error message to appear
     await waitFor(() => {

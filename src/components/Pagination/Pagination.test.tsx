@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import Pagination from './Pagination';
 import { PaginationProps } from './Pagination.types';
@@ -19,37 +20,37 @@ describe('Pagination Component', () => {
     expect(screen.getByTestId('pagination-component')).toBeInTheDocument();
   });
 
-  it('dropdown perpage changes pagination', () => {
+  it('dropdown perpage changes pagination', async () => {
     render(<Pagination {...defaultProps} />);
     const dropdownButton = screen.getByTestId('perpage-dropdown');
-    fireEvent.click(dropdownButton);
-    fireEvent.click(screen.getByText('5 results per page'));
+    await userEvent.click(dropdownButton);
+    await userEvent.click(screen.getByText('5 results per page'));
     expect(defaultProps.setPerPage).toHaveBeenCalledWith(5);
   });
 
-  it('calls setPage with correct value on next button click', () => {
+  it('calls setPage with correct value on next button click', async () => {
     render(<Pagination {...defaultProps} />);
-    fireEvent.click(screen.getByText('Next'));
+    await userEvent.click(screen.getByText('Next'));
     expect(defaultProps.setPage).toHaveBeenCalledWith(2);
   });
 
-  it('calls setPage with correct value on previous button click', () => {
+  it('calls setPage with correct value on previous button click', async () => {
     const pageTwoProps = { ...defaultProps, currentPage: 2 };
     render(<Pagination {...pageTwoProps} />);
-    fireEvent.click(screen.getByText('Previous'));
+    await userEvent.click(screen.getByText('Previous'));
     expect(pageTwoProps.setPage).toHaveBeenCalledWith(1);
   });
 
   it('disables previous button on first page', () => {
     render(<Pagination {...defaultProps} />);
-    // eslint-disable-next-line testing-library/no-node-access
+
     expect(screen.getByText('Previous').closest('li')).toHaveClass('disabled');
   });
 
   it('disables next button on last page', () => {
     const pageThreeProps = { ...defaultProps, currentPage: 3 };
     render(<Pagination {...pageThreeProps} />);
-    // eslint-disable-next-line testing-library/no-node-access
+
     expect(screen.getByText('Next').closest('li')).toHaveClass('disabled');
   });
 });

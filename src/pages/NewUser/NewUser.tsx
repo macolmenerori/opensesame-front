@@ -39,6 +39,7 @@ const NewUser = () => {
       } else {
         showToast({ title: 'Error', message: 'User was not created', type: 'danger' });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       showToast({ title: 'Error', message: 'User was not created', type: 'danger' });
     }

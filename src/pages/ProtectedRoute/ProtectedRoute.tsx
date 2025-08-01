@@ -16,6 +16,7 @@ const ProtectedRoute = () => {
       try {
         await api.get('/v1/users/isloggedin');
         setAuth(true);
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
         setAuth(false);
       }

@@ -11,7 +11,9 @@ const ProtectedRoute = React.lazy(() => import('./pages/ProtectedRoute/Protected
 
 const LoadingFallback = () => <div>Loading...</div>;
 
-const lazyLoad = (Component: React.LazyExoticComponent<any>) => {
+const lazyLoad = (
+  Component: React.LazyExoticComponent<React.ComponentType<Record<string, unknown>>>
+) => {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <Component />

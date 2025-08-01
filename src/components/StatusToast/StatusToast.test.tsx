@@ -1,7 +1,7 @@
-/* eslint-disable testing-library/no-node-access */
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import StatusToast from './StatusToast';
 import { StatusToastProps } from './StatusToast.types';
@@ -28,9 +28,9 @@ describe('StatusToast Component', () => {
     expect(screen.getByText('Test Title').closest('.card')).toHaveClass('text-bg-danger');
   });
 
-  it('calls the onClose function when the close button is clicked', () => {
+  it('calls the onClose function when the close button is clicked', async () => {
     render(<StatusToast {...defaultProps} />);
-    fireEvent.click(screen.getByRole('button', { name: /close/i }));
+    await userEvent.click(screen.getByRole('button', { name: /close/i }));
     expect(defaultProps.onClose).toHaveBeenCalledTimes(1);
   });
 

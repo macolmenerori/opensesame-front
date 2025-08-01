@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { User } from '../../common/types/User.types';
 import { useUser } from '../../context/UserContext/UserContext';
@@ -65,7 +66,7 @@ describe('UsersTable', () => {
     expect(screen.getByText('Perm3, perm4...')).toBeInTheDocument();
   });
 
-  it('calls setPermissionsModalUser when permissions button is clicked', () => {
+  it('calls setPermissionsModalUser when permissions button is clicked', async () => {
     // Mock the user context
     (useUser as jest.Mock).mockReturnValue({
       user: { role: 'admin' }
@@ -75,12 +76,12 @@ describe('UsersTable', () => {
 
     const permissionsButton = screen.getAllByTestId('permissions-button')[0];
 
-    fireEvent.click(permissionsButton);
+    await userEvent.click(permissionsButton);
 
     expect(mockSetPermissionsModalUser).toHaveBeenCalledWith('marty@test.com');
   });
 
-  it('calls setUserDetailsModalUser when user details button is clicked', () => {
+  it('calls setUserDetailsModalUser when user details button is clicked', async () => {
     // Mock the user context
     (useUser as jest.Mock).mockReturnValue({
       user: { role: 'admin' }
@@ -90,7 +91,7 @@ describe('UsersTable', () => {
 
     const userDetailsButton = screen.getAllByText('User details')[0];
 
-    fireEvent.click(userDetailsButton);
+    await userEvent.click(userDetailsButton);
 
     expect(mockSetUserDetailsModalUser).toHaveBeenCalledWith(mockData[0]);
   });
