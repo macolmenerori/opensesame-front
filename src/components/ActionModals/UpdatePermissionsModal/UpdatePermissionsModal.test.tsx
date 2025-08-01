@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../../api';
 import { useToast } from '../../../context/ToastContext/ToastContext';
@@ -60,12 +61,11 @@ describe('UpdatePermissionsModal', () => {
     );
 
     // Change permissions
-    fireEvent.change(screen.getByTestId('permissions-textarea'), {
-      target: { value: 'PermissionSuccess' }
-    });
+    await userEvent.clear(screen.getByTestId('permissions-textarea'));
+    await userEvent.type(screen.getByTestId('permissions-textarea'), 'PermissionSuccess');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the API was called with the correct data
     await waitFor(() => {
@@ -106,12 +106,11 @@ describe('UpdatePermissionsModal', () => {
     );
 
     // Change permissions
-    fireEvent.change(screen.getByTestId('permissions-textarea'), {
-      target: { value: 'PermissionSuccess' }
-    });
+    await userEvent.clear(screen.getByTestId('permissions-textarea'));
+    await userEvent.type(screen.getByTestId('permissions-textarea'), 'PermissionSuccess');
 
     // Click the update button
-    fireEvent.click(screen.getByText('Update'));
+    await userEvent.click(screen.getByText('Update'));
 
     // Check that the error toast was shown
     await waitFor(() => {

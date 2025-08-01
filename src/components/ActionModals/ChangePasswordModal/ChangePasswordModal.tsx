@@ -55,6 +55,7 @@ const ChangePasswordModal = ({
       } else {
         showToast({ title: 'Error', message: 'Password was not updated', type: 'danger' });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (e) {
       showToast({ title: 'Error', message: 'Password was not updated', type: 'danger' });
     }

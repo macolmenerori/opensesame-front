@@ -38,6 +38,7 @@ const DeleteUserModal = ({
       } else {
         showToast({ title: 'Error', message: 'User was not deleted', type: 'danger' });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       showToast({ title: 'Error', message: 'User was not deleted', type: 'danger' });
     }

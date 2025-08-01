@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { User } from '../../common/types/User.types';
 import { allusers } from '../../mocks';
@@ -34,11 +35,11 @@ describe('UserDetailsModal', () => {
     expect(screen.getByText('No permissions')).toBeInTheDocument();
   });
 
-  it('should call setUserDetailsModalUser with undefined when close button is clicked', () => {
+  it('should call setUserDetailsModalUser with undefined when close button is clicked', async () => {
     renderComponent(mockUser as User);
 
     const closeButton = screen.getByText('Close');
-    fireEvent.click(closeButton);
+    await userEvent.click(closeButton);
 
     expect(mockSetUserDetailsModalUser).toHaveBeenCalledWith(undefined);
   });

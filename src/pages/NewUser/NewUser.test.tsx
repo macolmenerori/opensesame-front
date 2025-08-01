@@ -1,7 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import '@testing-library/jest-dom';
 
@@ -71,19 +72,22 @@ describe('NewUser Component', () => {
     expect(submitButton).toBeEnabled();
 
     // Populate form
-    fireEvent.change(screen.getByTestId('name-input'), { target: { value: 'John Doe' } });
-    fireEvent.change(screen.getByTestId('email-input'), {
-      target: { value: 'john.doe@example.com' }
-    });
-    fireEvent.change(screen.getByTestId('role-select'), { target: { value: 'user' } });
-    fireEvent.change(screen.getByTestId('password-input'), { target: { value: 'password123' } });
-    fireEvent.change(screen.getByTestId('confirm-password-input'), {
-      target: { value: 'password123' }
-    });
+    await userEvent.clear(screen.getByTestId('name-input'));
+    await userEvent.type(screen.getByTestId('name-input'), 'John Doe');
+    await userEvent.clear(screen.getByTestId('email-input'));
+    await userEvent.type(screen.getByTestId('email-input'), 'john.doe@example.com');
+    await userEvent.selectOptions(screen.getByTestId('role-select'), 'user');
+    await userEvent.clear(screen.getByTestId('password-input'));
+    await userEvent.type(screen.getByTestId('password-input'), 'password123');
+    await userEvent.clear(screen.getByTestId('confirm-password-input'));
+    await userEvent.type(screen.getByTestId('confirm-password-input'), 'password123');
 
     // Submit the form directly using the form element
     const formElement = screen.getByTestId('new-user-form'); // Assuming the form has a role="form"
-    fireEvent.submit(formElement);
+    await userEvent.click(
+      formElement.querySelector('[type="submit"]') ||
+        screen.getByRole('button', { name: /sign up user/i })
+    );
 
     // Wait for the API call to be made
     await waitFor(() => {

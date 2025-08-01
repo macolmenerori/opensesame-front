@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import api from '../../api';
 import { useToast } from '../../context/ToastContext/ToastContext';
@@ -13,17 +14,19 @@ jest.mock('../../context/ToastContext/ToastContext');
 describe('SearchUserModal', () => {
   const setUserDetailsModalUser = jest.fn();
   const showToast = jest.fn();
+  let user: ReturnType<typeof userEvent.setup>;
 
   beforeEach(() => {
+    jest.useFakeTimers();
+    user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     (useToast as jest.Mock).mockReturnValue({ showToast });
   });
 
   afterEach(() => {
+    jest.runOnlyPendingTimers();
+    jest.useRealTimers();
     jest.clearAllMocks();
   });
-
-  // For the debounce timer
-  jest.useFakeTimers();
 
   it('renders the modal correctly', () => {
     render(<SearchUserModal setUserDetailsModalUser={setUserDetailsModalUser} />);
@@ -36,12 +39,13 @@ describe('SearchUserModal', () => {
 
     render(<SearchUserModal setUserDetailsModalUser={setUserDetailsModalUser} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Search users by name...'), {
-      target: { value: 'Marty' }
-    });
+    const searchInput = screen.getByPlaceholderText('Search users by name...');
 
-    // Run the debounce timer
-    jest.runAllTimers();
+    await user.clear(searchInput);
+    await user.type(searchInput, 'Marty');
+
+    // Fast-forward time to trigger debounce
+    jest.advanceTimersByTime(1300);
 
     await waitFor(() => {
       expect(api.get).toHaveBeenCalledWith('/v1/users/searchbyname?name=Marty&page=1&perpage=10');
@@ -53,11 +57,13 @@ describe('SearchUserModal', () => {
 
     render(<SearchUserModal setUserDetailsModalUser={setUserDetailsModalUser} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Search users by name...'), {
-      target: { value: 'Marty' }
-    });
+    const searchInput = screen.getByPlaceholderText('Search users by name...');
 
-    jest.runAllTimers();
+    await user.clear(searchInput);
+    await user.type(searchInput, 'Marty');
+
+    // Fast-forward time to trigger debounce
+    jest.advanceTimersByTime(1300);
 
     await waitFor(() =>
       expect(api.get).toHaveBeenCalledWith('/v1/users/searchbyname?name=Marty&page=1&perpage=10')
@@ -73,11 +79,12 @@ describe('SearchUserModal', () => {
   it('clears users if query is empty', async () => {
     render(<SearchUserModal setUserDetailsModalUser={setUserDetailsModalUser} />);
 
-    fireEvent.change(screen.getByPlaceholderText('Search users by name...'), {
-      target: { value: '' }
-    });
+    const searchInput = screen.getByPlaceholderText('Search users by name...');
 
-    jest.runAllTimers();
+    await user.clear(searchInput);
+
+    // Fast-forward time to trigger debounce
+    jest.advanceTimersByTime(1300);
 
     await waitFor(() => expect(api.get).not.toHaveBeenCalled());
 

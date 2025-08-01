@@ -62,6 +62,7 @@ const UpdateRolesModal = ({
       } else {
         showToast({ title: 'Error', message: 'Role was not updated', type: 'danger' });
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       showToast({ title: 'Error', message: 'Role was not updated', type: 'danger' });
     }
