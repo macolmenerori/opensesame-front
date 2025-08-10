@@ -18,7 +18,11 @@ export const handlers = [
     if (email === 'test@example.com' && password === 'password123') {
       return res(
         ctx.status(200),
-        ctx.json({ data: { user: { id: 1, name: 'Test User', email } } })
+        ctx.json({
+          status: 'success',
+          token: 'mock-jwt-token',
+          data: { user: { id: 1, name: 'Test User', email } }
+        })
       );
     }
     return res(ctx.status(401), ctx.json({ message: 'Invalid credentials' }));

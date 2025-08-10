@@ -11,11 +11,11 @@ import { useUser } from '../../context/UserContext/UserContext';
  */
 const Navbar = () => {
   const navigate = useNavigate();
-  const { setUser } = useUser();
+  const { logout } = useUser();
 
   const handleLogout = async () => {
     await api.delete('/v1/users/logout');
-    setUser(null);
+    logout();
     navigate('/login');
   };
 

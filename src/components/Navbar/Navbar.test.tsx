@@ -13,11 +13,11 @@ jest.mock('../../context/UserContext/UserContext');
 jest.mock('../../api');
 
 describe('Navbar', () => {
-  const mockSetUser = jest.fn();
+  const mockLogout = jest.fn();
   (api.delete as jest.Mock).mockResolvedValue({});
 
   beforeEach(() => {
-    (useUser as jest.Mock).mockReturnValue({ setUser: mockSetUser });
+    (useUser as jest.Mock).mockReturnValue({ logout: mockLogout });
     (api.delete as jest.Mock).mockResolvedValue({});
   });
 
@@ -45,6 +45,6 @@ describe('Navbar', () => {
     await waitFor(() => {
       expect(api.delete).toHaveBeenCalledWith('/v1/users/logout');
     });
-    expect(mockSetUser).toHaveBeenCalledWith(null);
+    expect(mockLogout).toHaveBeenCalled();
   });
 });
