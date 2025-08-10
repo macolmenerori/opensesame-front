@@ -6,14 +6,14 @@ import api from '../../api';
 import { useUser } from '../../context/UserContext/UserContext';
 
 /**
- * Login page. User can login with email and password. This sets the user in the UserContext and a JWT token on a cookie.
+ * Login page. User can login with email and password. This sets the user in the UserContext and a JWT token in localStorage.
  * Redirects to the main page after successful login, or stays on the login page if the login fails.
  * If the user is already logged in, redirects to the main page.
  *
  * @returns {JSX.Element} Login component
  */
 function Login() {
-  const { setUser } = useUser();
+  const { login } = useUser();
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -47,7 +47,7 @@ function Login() {
     try {
       const response = await api.post('/v1/users/login', { email, password });
       if (response.status === 200) {
-        setUser(response.data.data.user);
+        login(response.data.data.user, response.data.token);
         navigate('/mainpage'); // Redirect to the main page after login
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

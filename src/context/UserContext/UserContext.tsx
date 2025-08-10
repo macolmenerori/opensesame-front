@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from 'react';
 
 import { User } from '../../common/types/User.types';
+import { removeToken, setToken } from '../../utils/tokenStorage';
 
 import { UserContextType, UserProviderProps } from './UserContext.types';
 
@@ -16,7 +17,19 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  const login = (userData: User, token: string) => {
+    setToken(token);
+    setUser(userData);
+  };
+
+  const logout = () => {
+    removeToken();
+    setUser(null);
+  };
+
+  return (
+    <UserContext.Provider value={{ user, setUser, login, logout }}>{children}</UserContext.Provider>
+  );
 };
 
 /**

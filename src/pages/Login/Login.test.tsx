@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 
 import Login from './Login';
 
-const mockSetUser = jest.fn(); // Mock the setUser function
+const mockLogin = jest.fn(); // Mock the login function
 jest.mock('../../context/UserContext/UserContext', () => ({
   user: {
     name: 'John Doe',
@@ -14,7 +14,7 @@ jest.mock('../../context/UserContext/UserContext', () => ({
     role: 'admin'
   },
   useUser: () => ({
-    setUser: mockSetUser
+    login: mockLogin
   })
 }));
 
@@ -50,14 +50,17 @@ describe('Login', () => {
     // Simulate form submission by clicking the login button
     await userEvent.click(submitButton);
 
-    // Wait for the success response and assert that setUser and navigate are called
+    // Wait for the success response and assert that login and navigate are called
     await waitFor(() => {
-      // Check if setUser was called with the correct user data
-      expect(mockSetUser).toHaveBeenCalledWith({
-        id: 1,
-        name: 'Test User',
-        email: 'test@example.com'
-      });
+      // Check if login was called with the correct user data and token
+      expect(mockLogin).toHaveBeenCalledWith(
+        {
+          id: 1,
+          name: 'Test User',
+          email: 'test@example.com'
+        },
+        'mock-jwt-token'
+      );
     });
   });
 
