@@ -21,7 +21,7 @@
     "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn test && yarn build"
   },
   "dependencies": {
-    "axios": "^1.11.0",
+    "axios": "^1.12.0",
     "dotenv": "^17.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
