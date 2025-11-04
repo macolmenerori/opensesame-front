@@ -7,7 +7,7 @@ Manage users and assign them roles and permissions to perform certain actions.
 ## Requirements
 
 - [opensesame-back](https://github.com/macolmenerori/opensesame-back) set up and running
-- [Node JS](https://nodejs.org/en) `>=22.11`
+- [Node JS](https://nodejs.org/en) `>=24.0` (Krypton)
 - [yarn](https://yarnpkg.com/getting-started/install) `>=1.22`
 
 ## How to set up and run (Docker)

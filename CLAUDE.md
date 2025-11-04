@@ -95,6 +95,7 @@ The app uses strict TypeScript with:
 
 ## Important Notes
 
+- Requires Node.js 24 (Krypton) or higher
 - Requires opensesame-back API running on configured BASE_URL_API
 - Uses React 19 with modern React Router v7
 - Webpack dev server includes history API fallback for client-side routing
