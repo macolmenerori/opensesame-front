@@ -27,7 +27,7 @@
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.1",
     "react-router": "^7.9.6",
-    "swr": "^2.3.6"
+    "swr": "^2.3.7"
   },
   "devDependencies": {
     "@babel/core": "^7.28.5",
