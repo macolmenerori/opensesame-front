@@ -31,7 +31,7 @@ docker build -t opensesame-front:latest .
 3. Run the Docker image
 
 ```
-docker run --env-file .env -p 3000:3000 --name opensesame-front opensesame-front
+docker run --env-file .env -p 80:80 --name opensesame-front opensesame-front
 ```
 
 ## How to set up and run (Native)
