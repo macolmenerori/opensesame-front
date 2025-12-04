@@ -10,28 +10,28 @@ OpenSesame Frontend is a React-based user management and authentication interfac
 
 ```bash
 # Development server (runs on port 3000)
-yarn start
+pnpm start
 
 # Production build
-yarn build
+pnpm build
 
 # Run all tests
-yarn test
+pnpm test
 
 # Lint and fix code
-yarn lint
+pnpm lint
 
 # Format code with Prettier
-yarn prettify
+pnpm prettify
 
 # TypeScript type checking
-yarn types
+pnpm types
 
 # Complete verification pipeline (lint, format, types, audit, test, build)
-yarn verify
+pnpm verify
 
 # Security scan with gitleaks
-yarn gitleaks
+pnpm gitleaks
 ```
 
 ## Architecture Overview

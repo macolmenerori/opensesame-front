@@ -8,13 +8,13 @@ Manage users and assign them roles and permissions to perform certain actions.
 
 - [opensesame-back](https://github.com/macolmenerori/opensesame-back) set up and running
 - [Node JS](https://nodejs.org/en) `>=24.0` (Krypton)
-- [yarn](https://yarnpkg.com/getting-started/install) `>=1.22`
+- [pnpm](https://pnpm.io/installation)
 
 ## How to set up and run (Docker)
 
 Easiest way to set up the project to use it right away.
 
-### Requirements:
+### Requirements
 
 - [Docker](https://www.docker.com/) installed and running
 - [opensesame-back](https://github.com/macolmenerori/opensesame-back) set up and running (can be in Docker too)
@@ -31,23 +31,23 @@ docker build -t opensesame-front:latest .
 3. Run the Docker image
 
 ```
-docker run --env-file .env -p 3000:3000 --name opensesame-front opensesame-front
+docker run --env-file .env -p 80:80 --name opensesame-front opensesame-front
 ```
 
 ## How to set up and run (Native)
 
 For feature-testing and development.
 
-### Requirements:
+### Requirements
 
 - Node JS
-- yarn
+- pnpm
 
 ### Steps
 
 1. Edit the file `.example.env` with all the parameters, then rename it to `.env`
-2. Install packages `yarn install`
-3. Run the dev environment `yarn start`
+2. Install packages `pnpm install`
+3. Run the dev environment `pnpm start`
 
 ## Configuration
 
