@@ -10,6 +10,7 @@
   "engines": {
     "node": ">=24.0.0"
   },
+  "packageManager": "pnpm@10.24.0",
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
@@ -18,7 +19,7 @@
     "prettify": "prettier -w --log-level=silent src/",
     "lint": "eslint --fix .",
     "types": "tsc --noEmit",
-    "verify": "yarn lint && yarn prettify && yarn types && yarn audit --groups dependencies && yarn test && yarn build"
+    "verify": "pnpm lint && pnpm prettify && pnpm types && pnpm audit --prod && pnpm test && pnpm build"
   },
   "dependencies": {
     "axios": "^1.13.2",
@@ -35,6 +36,8 @@
     "@babel/preset-react": "^7.28.5",
     "@babel/preset-typescript": "^7.28.5",
     "@eslint/compat": "^2.0.0",
+    "@eslint/eslintrc": "^3.3.3",
+    "@eslint/js": "^9.39.1",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -75,7 +78,9 @@
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
   },
-  "resolutions": {
-    "form-data": "^4.0.4"
+  "pnpm": {
+    "overrides": {
+      "form-data": "^4.0.4"
+    }
   }
 }
