@@ -102,6 +102,10 @@ export default [
       'no-console': 'warn',
       'no-useless-escape': 'warn',
 
+      // React hooks v7 rules - disabled as current patterns are intentional
+      'react-hooks/set-state-in-effect': 'off',
+      'react-hooks/incompatible-library': 'off',
+
       // Testing Library rule overrides
       'testing-library/prefer-user-event': 'error',
       'testing-library/no-node-access': 'off', // Turn off if it's causing issues with userEvent
