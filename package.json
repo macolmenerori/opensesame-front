@@ -10,7 +10,7 @@
   "engines": {
     "node": ">=24.0.0"
   },
-  "packageManager": "pnpm@10.28.0",
+  "packageManager": "pnpm@10.29.3",
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
@@ -25,7 +25,7 @@
     "axios": "^1.13.5",
     "dotenv": "^17.2.4",
     "react": "^19.2.4",
-    "react-dom": "^19.2.3",
+    "react-dom": "^19.2.4",
     "react-hook-form": "^7.71.1",
     "react-router": "^7.13.0",
     "swr": "^2.4.0"
