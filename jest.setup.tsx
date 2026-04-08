@@ -1,5 +1,5 @@
 import { setupServer } from 'msw/node';
-import { TextDecoder, TextEncoder } from 'util';
+import { TextDecoder, TextEncoder } from 'node:util';
 
 import '@testing-library/jest-dom';
 
@@ -35,6 +35,7 @@ window.IntersectionObserver = jest.fn(() => ({
   unobserve: jest.fn(),
   root: null,
   rootMargin: '',
+  scrollMargin: '',
   takeRecords: jest.fn(),
   thresholds: [],
   disconnect: jest.fn()
