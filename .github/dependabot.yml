@@ -16,3 +16,21 @@ updates:
       include: scope
     labels:
       - 'dependencies'
+    groups:
+      react-ecosystem:
+        patterns:
+          - 'react*'
+          - '@types/react*'
+      testing-ecosystem:
+        patterns:
+          - 'jest*'
+          - '@types/jest*'
+          - '@testing-library*'
+          - 'ts-jest'
+      build-tools:
+        patterns:
+          - 'webpack*'
+          - 'copy-webpack-plugin'
+          - 'mini-css-extract-plugin'
+          - 'html-webpack-plugin'
+          - '@babel/*'
