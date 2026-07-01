@@ -1,9 +1,9 @@
 import { fixupConfigRules, fixupPluginRules } from '@eslint/compat';
 import { FlatCompat } from '@eslint/eslintrc';
 import js from '@eslint/js';
+import eslintReact from '@eslint-react/eslint-plugin';
 import typescriptEslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
-import react from 'eslint-plugin-react';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import path from 'node:path';
@@ -25,17 +25,16 @@ export default [
     compat.extends(
       'eslint:recommended',
       'plugin:@typescript-eslint/recommended',
-      'plugin:react/recommended',
       'plugin:react-hooks/recommended',
       'plugin:jsx-a11y/strict',
       'plugin:jest-dom/recommended',
       'plugin:testing-library/react'
     )
   ),
+  eslintReact.configs['recommended-typescript'],
   {
     plugins: {
       '@typescript-eslint': fixupPluginRules(typescriptEslint),
-      react: fixupPluginRules(react),
       'simple-import-sort': simpleImportSort
     },
 
@@ -57,12 +56,6 @@ export default [
       }
     },
 
-    settings: {
-      react: {
-        version: 'detect'
-      }
-    },
-
     rules: {
       '@typescript-eslint/no-explicit-any': 'warn',
       '@typescript-eslint/no-unused-vars': 'warn',
@@ -78,7 +71,6 @@ export default [
         }
       ],
 
-      'react/prop-types': 'off',
       'valid-typeof': 'warn',
       'simple-import-sort/exports': 'error',
 
@@ -105,6 +97,7 @@ export default [
       // React hooks v7 rules - disabled as current patterns are intentional
       'react-hooks/set-state-in-effect': 'off',
       'react-hooks/incompatible-library': 'off',
+      '@eslint-react/set-state-in-effect': 'off',
 
       // Testing Library rule overrides
       'testing-library/prefer-user-event': 'error',
