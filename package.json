@@ -28,7 +28,7 @@
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.79.0",
     "react-router": "^7.17.0",
-    "swr": "^2.4.1"
+    "swr": "^2.4.2"
   },
   "devDependencies": {
     "@eslint/compat": "^2.1.0",
