@@ -19,7 +19,14 @@ const compat = new FlatCompat({
 
 export default [
   {
-    ignores: ['**/node_modules', '**/types', '**/.github', '**/build', '**/webpack.config.js']
+    ignores: [
+      '**/node_modules',
+      '**/types',
+      '**/.github',
+      '**/build',
+      '**/webpack.config.js',
+      '**/jest.esm-deps-transform.js'
+    ]
   },
   ...fixupConfigRules(
     compat.extends(
