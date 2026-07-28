@@ -23,9 +23,18 @@ module.exports = {
     '<rootDir>/public/'
   ],
   transform: {
-    '^.+\\\\.(js|jsx|ts|tsx)$': ['ts-jest']
+    // Must come first: ESM-only deps need `import.meta` neutralised before ts-jest
+    '/node_modules/.+\\.(js|mjs)$': '<rootDir>/jest.esm-deps-transform.js',
+    '^.+\\.(js|jsx|mjs|ts|tsx)$': ['ts-jest']
   },
-  transformIgnorePatterns: ['/node_modules/', '^.+\\\\.module\\\\.(css|sass|scss)$'],
+  // react-router v8 and its `cookie-es` dep are ESM-only, so they must be
+  // transpiled to CJS instead of being skipped like the rest of node_modules.
+  // The `.pnpm/` lookahead is needed because pnpm stores packages at
+  // /node_modules/.pnpm/<pkg>@<version>/node_modules/<pkg>/
+  transformIgnorePatterns: [
+    '/node_modules/(?!\\.pnpm/)(?!react-router/)(?!cookie-es/)',
+    '^.+\\.module\\.(css|sass|scss)$'
+  ],
   testEnvironment: 'jest-environment-jsdom',
   testTimeout: 15000,
   preset: 'ts-jest',
