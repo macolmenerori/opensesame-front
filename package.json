@@ -24,9 +24,9 @@
   "dependencies": {
     "axios": "^1.20.0",
     "dotenv": "^17.4.2",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "react-hook-form": "^7.87.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "react-hook-form": "^7.88.0",
     "react-router": "^8.3.1",
     "swr": "^2.5.1"
   },
@@ -41,8 +41,8 @@
     "@testing-library/user-event": "^14.6.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.5.1",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
     "@typescript-eslint/parser": "^8.68.0",
     "copy-webpack-plugin": "^14.0.0",
