@@ -1,4 +1,5 @@
-// Jest transformer for ESM-only dependencies (react-router v8 and its `cookie-es` dep).
+// Jest transformer for ESM-only dependencies (react-router v8 and its `cookie-es` and
+// `@remix-run/route-pattern` deps).
 //
 // ts-jest happily down-levels their ESM to CommonJS, but it cannot rewrite
 // `import.meta`, which react-router uses in a single file
