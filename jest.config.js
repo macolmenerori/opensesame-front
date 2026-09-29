@@ -27,12 +27,13 @@ module.exports = {
     '/node_modules/.+\\.(js|mjs)$': '<rootDir>/jest.esm-deps-transform.js',
     '^.+\\.(js|jsx|mjs|ts|tsx)$': ['ts-jest']
   },
-  // react-router v8 and its `cookie-es` dep are ESM-only, so they must be
-  // transpiled to CJS instead of being skipped like the rest of node_modules.
+  // react-router v8 and its `cookie-es` and `@remix-run/route-pattern` deps are
+  // ESM-only, so they must be transpiled to CJS instead of being skipped like
+  // the rest of node_modules.
   // The `.pnpm/` lookahead is needed because pnpm stores packages at
   // /node_modules/.pnpm/<pkg>@<version>/node_modules/<pkg>/
   transformIgnorePatterns: [
-    '/node_modules/(?!\\.pnpm/)(?!react-router/)(?!cookie-es/)',
+    '/node_modules/(?!\\.pnpm/)(?!react-router/)(?!cookie-es/)(?!@remix-run/route-pattern/)',
     '^.+\\.module\\.(css|sass|scss)$'
   ],
   testEnvironment: 'jest-environment-jsdom',
