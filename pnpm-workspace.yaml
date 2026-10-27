@@ -7,7 +7,4 @@ allowBuilds:
   unrs-resolver: true
 
 overrides:
-  'picomatch': '4.0.4'
-  'serialize-javascript': '7.0.5'
-  'postcss': '8.5.15'
-  '@xmldom/xmldom': '0.9.10'
+  'follow-redirects': '1.16.2'
