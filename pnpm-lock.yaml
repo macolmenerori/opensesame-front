@@ -303,8 +303,8 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
       undici:
-        specifier: ^8.12.3
-        version: 8.12.3
+        specifier: ^8.12.4
+        version: 8.12.4
       webpack:
         specifier: ^5.112.2
         version: 5.112.2(clean-css@5.3.3)(html-minifier-terser@6.1.0)(postcss@8.5.32)(uglify-js@3.19.3)(webpack-cli@7.3.1)
@@ -4511,8 +4511,8 @@ packages:
   undici-types@8.9.0:
     resolution: {integrity: sha512-KTDyRTYX8sWmKXAikPHHSyc63CRPETMctyjKFupcC6OBLXT3xsN0e9aF7m+mIXutFWpUXuedtowG7iLOzp0kQg==}
 
-  undici@8.12.3:
-    resolution: {integrity: sha512-+fdndUTwBP86cVjihTp21hZHo7d6oj1c/47XPA3lL8mM0XHs+C4EkcjmgRsFnFk2f/UONGDy9ItBItmXsLOQHw==}
+  undici@8.12.4:
+    resolution: {integrity: sha512-8Mx+uNKKER2bA4AdtedkqRbwUCIJFr2nJckXRe5yrDqzePqwLP7VNcctN8/XdmDSbF7mS+jJKIszlL+vbam1VA==}
     engines: {node: '>=22.19.0'}
 
   unpipe@1.0.0:
@@ -9591,7 +9591,7 @@ snapshots:
 
   undici-types@8.9.0: {}
 
-  undici@8.12.3: {}
+  undici@8.12.4: {}
 
   unpipe@1.0.0: {}
 
